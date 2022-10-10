@@ -1,7 +1,7 @@
 {
   "name": "com.ashera.datetime",
   "version": "1.0.0",
-  "description": "@description@",
+  "description": "Date Time plugin",
   "author": "Ram M",
   "license": "ISC"
 }
