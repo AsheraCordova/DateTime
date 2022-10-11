@@ -6,7 +6,7 @@
   <name>Datetime Plugin</name>
 
   <platform name="browser">
-  	<config-file target="res/xml/config.xml" parent="/*">
+  	<config-file target="config.xml" parent="/*">
       <feature name="CordovaDateTimePlugin">
         <param name="android-package" value="com.ashera.datetime.CordovaDateTimePlugin"/>
         <param name="onload" value="true" />
