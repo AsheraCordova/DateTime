@@ -16,6 +16,12 @@ https://asheracordova.github.io/doc/com/ashera/datetime/DatePicker.html
 
 https://asheracordova.github.io/doc/com/ashera/datetime/TimePicker.html
 
+To install the plugin use:
+
+```
+cordova plugin add https://github.com/AsheraCordova/DateTime.git
+```
+
 ## Custom Attributes
 
 The following table lists the custom attributes used in widgets:
