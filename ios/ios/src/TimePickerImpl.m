@@ -1425,6 +1425,9 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
   (void) [obj putWithId:@"eventType" withId:@"textchange"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
+    (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
+  }
   ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(obj, @"id", [((id<ASIWidget>) nil_chk(w_)) getId]);
   ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(obj, @"s", NSString_java_valueOf_(s));
   ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(obj, @"start", JavaLangInteger_valueOfWithInt_(start));
@@ -1444,6 +1447,9 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
   (void) [obj putWithId:@"eventType" withId:@"beforetextchange"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
+    (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
+  }
   ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(obj, @"id", [((id<ASIWidget>) nil_chk(w_)) getId]);
   ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(obj, @"s", NSString_java_valueOf_(s));
   ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(obj, @"start", JavaLangInteger_valueOfWithInt_(start));
@@ -1460,6 +1466,9 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
   (void) [obj putWithId:@"eventType" withId:@"aftertextchange"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
+    (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
+  }
   ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(obj, @"id", [((id<ASIWidget>) nil_chk(w_)) getId]);
   (void) ASEventExpressionParser_parseEventExpressionWithNSString_withJavaUtilMap_(strValue_, obj);
   [((id<ASIWidget>) nil_chk(w_)) updateModelToEventMapWithJavaUtilMap:obj withNSString:@"onafterTextChange" withNSString:(NSString *) cast_chk([obj getWithId:ASEventExpressionParser_KEY_EVENT_ARGS], [NSString class])];

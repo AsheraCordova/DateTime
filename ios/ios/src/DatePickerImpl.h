@@ -304,6 +304,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;

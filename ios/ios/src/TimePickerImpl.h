@@ -304,6 +304,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;
