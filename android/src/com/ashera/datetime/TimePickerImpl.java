@@ -69,7 +69,7 @@ public class TimePickerImpl extends BaseHasWidgets implements android.app.TimePi
 
 	@Override
 	public IWidget newInstance() {
-		return new TimePickerImpl();
+		return new TimePickerImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -115,7 +115,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		timePicker.removeView((View) w.asWidget());
 		return remove;
@@ -241,11 +241,6 @@ Context context = (Context) fragment.getRootActivity();
 		public TimePickerExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -357,12 +352,11 @@ Context context = (Context) fragment.getRootActivity();
         	ViewImpl.drawableStateChanged(TimePickerImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((TimePickerExt) timePicker).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return TimePickerExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -564,7 +558,7 @@ return getMyText(key, decorator);			}
 			visibility = View.GONE;
 		}
 		
-		clearButton.setAttribute(WidgetFactory.getAttribute(clearButton.getLocalName(), "visibility"), visibility, true);
+		clearButton.setAttribute("visibility", visibility, true);
 		
 	}
 	
@@ -1077,10 +1071,10 @@ public class TimePickerCommandParamsBuilder extends com.ashera.layout.ViewGroupI
 	
 	private void updateText() {
 		if (hour == -1 || minute == -1) {
-			editText.setAttribute(WidgetFactory.getAttribute(editText.getLocalName(), "text"), "", true);
+			editText.setAttribute("text", "", true);
 		} else {
 			Calendar cal = new GregorianCalendar(0,0,0, hour, minute);
-			editText.setAttribute(WidgetFactory.getAttribute(editText.getLocalName(), "text"), timeFormat.format(cal.getTime()), true);
+			editText.setAttribute("text", timeFormat.format(cal.getTime()), true);
 		}
 	}
 	//end - timepicker

@@ -41,14 +41,14 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
 	public void loadAttributes(String localName) {
 		ViewGroupImpl.register(localName);
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onTextChange").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onbeforeTextChange").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onafterTextChange").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("timeFormat").withType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hint").withType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("showClearButton").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onTextChange").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onbeforeTextChange").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onafterTextChange").withType("string"));
 	
 	}
 	
@@ -64,7 +64,7 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
 
 	@Override
 	public IWidget newInstance() {
-		return new TimePickerImpl();
+		return new TimePickerImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -85,7 +85,7 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		timePicker.removeView((View) w.asWidget());
          ViewGroupImpl.nativeRemoveView(w);            
@@ -204,12 +204,7 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
 		}
 
 		public TimePickerExt() {
-			
-			
-			
-			
 			super();
-			
 			
 		}
 		
@@ -297,7 +292,46 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(TimePickerImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(TimePickerImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	TimePickerImpl.this.getParent().remove(TimePickerImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -307,6 +341,10 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			TimePickerImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
@@ -314,45 +352,17 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
             
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((TimePickerExt) timePicker).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return TimePickerExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
 		ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
 		Object nativeWidget = asNativeWidget();
 		switch (key.getAttributeName()) {
-			case "onTextChange": {
-
-
-		 setOnTextChange(key, strValue, objValue, decorator);
-
-
-
-			}
-			break;
-			case "onbeforeTextChange": {
-
-
-		 setBeforeOnTextChange(key, strValue, objValue, decorator);
-
-
-
-			}
-			break;
-			case "onafterTextChange": {
-
-
-		 setOnAfterTextChange(key, strValue, objValue, decorator);
-
-
-
-			}
-			break;
 			case "timeFormat": {
 
 
@@ -393,6 +403,33 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
 
 
 		setHintTextFormat(objValue);
+
+
+
+			}
+			break;
+			case "onTextChange": {
+
+
+		 setOnTextChange(key, strValue, objValue, decorator);
+
+
+
+			}
+			break;
+			case "onbeforeTextChange": {
+
+
+		 setBeforeOnTextChange(key, strValue, objValue, decorator);
+
+
+
+			}
+			break;
+			case "onafterTextChange": {
+
+
+		 setOnAfterTextChange(key, strValue, objValue, decorator);
 
 
 
@@ -521,7 +558,7 @@ return getMyText(key, decorator);			}
 			visibility = View.GONE;
 		}
 		
-		clearButton.setAttribute(WidgetFactory.getAttribute(clearButton.getLocalName(), "visibility"), visibility, true);
+		clearButton.setAttribute("visibility", visibility, true);
 		
 	}
 	
@@ -573,10 +610,10 @@ return getMyText(key, decorator);			}
 	
 	private void updateText() {
 		if (hour == -1 || minute == -1) {
-			editText.setAttribute(WidgetFactory.getAttribute(editText.getLocalName(), "text"), "", true);
+			editText.setAttribute("text", "", true);
 		} else {
 			Calendar cal = new GregorianCalendar(0,0,0, hour, minute);
-			editText.setAttribute(WidgetFactory.getAttribute(editText.getLocalName(), "text"), timeFormat.format(cal.getTime()), true);
+			editText.setAttribute("text", timeFormat.format(cal.getTime()), true);
 		}
 	}
 	
@@ -896,30 +933,6 @@ public  class TimePickerCommandBuilder extends com.ashera.layout.ViewGroupImpl.V
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public TimePickerCommandBuilder setOnTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public TimePickerCommandBuilder setOnbeforeTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onbeforeTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public TimePickerCommandBuilder setOnafterTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onafterTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public TimePickerCommandBuilder setTimeFormat(String value) {
 	Map<String, Object> attrs = initCommand("timeFormat");
 	attrs.put("type", "attribute");
@@ -982,23 +995,35 @@ public TimePickerCommandBuilder setHintTextFormat(String value) {
 
 	attrs.put("value", value);
 return this;}
+public TimePickerCommandBuilder setOnTextChange(String value) {
+	Map<String, Object> attrs = initCommand("onTextChange");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public TimePickerCommandBuilder setOnbeforeTextChange(String value) {
+	Map<String, Object> attrs = initCommand("onbeforeTextChange");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public TimePickerCommandBuilder setOnafterTextChange(String value) {
+	Map<String, Object> attrs = initCommand("onafterTextChange");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class TimePickerBean extends com.ashera.layout.ViewGroupImpl.ViewGroupBean{
 		public TimePickerBean() {
 			super(TimePickerImpl.this);
 		}
-public void setOnTextChange(String value) {
-	getBuilder().reset().setOnTextChange(value).execute(true);
-}
-
-public void setOnbeforeTextChange(String value) {
-	getBuilder().reset().setOnbeforeTextChange(value).execute(true);
-}
-
-public void setOnafterTextChange(String value) {
-	getBuilder().reset().setOnafterTextChange(value).execute(true);
-}
-
 public void setTimeFormat(String value) {
 	getBuilder().reset().setTimeFormat(value).execute(true);
 }
@@ -1023,6 +1048,18 @@ public void showClearButton(boolean value) {
 
 public void setHintTextFormat(String value) {
 	getBuilder().reset().setHintTextFormat(value).execute(true);
+}
+
+public void setOnTextChange(String value) {
+	getBuilder().reset().setOnTextChange(value).execute(true);
+}
+
+public void setOnbeforeTextChange(String value) {
+	getBuilder().reset().setOnbeforeTextChange(value).execute(true);
+}
+
+public void setOnafterTextChange(String value) {
+	getBuilder().reset().setOnafterTextChange(value).execute(true);
 }
 
 }

@@ -72,7 +72,7 @@ public class DatePickerImpl extends BaseHasWidgets implements DatePickerDialog.O
 
 	@Override
 	public IWidget newInstance() {
-		return new DatePickerImpl();
+		return new DatePickerImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -118,7 +118,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		datePicker.removeView((View) w.asWidget());
 		return remove;
@@ -244,11 +244,6 @@ Context context = (Context) fragment.getRootActivity();
 		public DatePickerExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -360,12 +355,11 @@ Context context = (Context) fragment.getRootActivity();
         	ViewImpl.drawableStateChanged(DatePickerImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((DatePickerExt) datePicker).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return DatePickerExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -1000,10 +994,10 @@ public class DatePickerCommandParamsBuilder extends com.ashera.layout.ViewGroupI
 			return;
 		}
 		if (year == -1 || month == -1 || day == -1) {
-			editText.setAttribute(WidgetFactory.getAttribute(editText.getLocalName(), "text"), "", true);
+			editText.setAttribute("text", "", true);
 		} else {
 			Calendar cal = new GregorianCalendar(year, month, day);
-			editText.setAttribute(WidgetFactory.getAttribute(editText.getLocalName(), "text"), displayFormatter.format(cal.getTime()), true);
+			editText.setAttribute("text", displayFormatter.format(cal.getTime()), true);
 		}
 	}
 
@@ -1191,7 +1185,7 @@ public class DatePickerCommandParamsBuilder extends com.ashera.layout.ViewGroupI
 			visibility = View.GONE;
 		}
 		
-		clearButton.setAttribute(WidgetFactory.getAttribute(clearButton.getLocalName(), "visibility"), visibility, true);
+		clearButton.setAttribute("visibility", visibility, true);
 		
 	}
 	//end - edittext

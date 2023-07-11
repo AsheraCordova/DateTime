@@ -29,6 +29,7 @@
 @class ASDatePickerImpl_DatePickerCommandParamsBuilder;
 @class ASDatePickerImpl_DatePickerParamsBean;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -79,6 +80,8 @@
 
 - (NSString *)getTextEntered;
 
+- (IOSClass *)getViewClass;
+
 - (void)initDatePicker OBJC_METHOD_FAMILY_NONE;
 
 - (void)invalidate;
@@ -111,10 +114,9 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)showErrorWithNSString:(NSString *)message;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)showErrorWithNSString:(NSString *)message;
 
 #pragma mark Package-Private
 
@@ -171,8 +173,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADRect;
+@class ADView;
 @class ASDatePickerImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -190,11 +195,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -207,6 +218,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -214,6 +229,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -430,6 +448,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -462,9 +482,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setOnTextChangeWithNSString:(NSString *)value;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setPaddingBottomWithNSString:(NSString *)arg0;
 
@@ -645,6 +669,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetMinHeight;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetMinWidth;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetModelDescPath;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetModelIdPath;
 

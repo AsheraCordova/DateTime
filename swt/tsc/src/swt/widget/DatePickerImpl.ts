@@ -31,15 +31,6 @@ export abstract class DatePickerImpl<T> extends ViewGroupImpl<T>{
 	static initialize() {
     }	
 	@Type(() => CommandAttr)
-	@Expose({ name: "onTextChange" })
-	onTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onbeforeTextChange" })
-	onbeforeTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onafterTextChange" })
-	onafterTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
 	@Expose({ name: "dateFormat" })
 	dateFormat!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
@@ -54,20 +45,29 @@ export abstract class DatePickerImpl<T> extends ViewGroupImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "hintTextFormat" })
 	hintTextFormat!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onTextChange" })
+	onTextChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onbeforeTextChange" })
+	onbeforeTextChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onafterTextChange" })
+	onafterTextChange!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.onTextChange = undefined;
-		this.onbeforeTextChange = undefined;
-		this.onafterTextChange = undefined;
 		this.dateFormat = undefined;
 		this.hint = undefined;
 		this.text = undefined;
 		this.showClearButton_ = undefined;
 		this.hintTextFormat = undefined;
+		this.onTextChange = undefined;
+		this.onbeforeTextChange = undefined;
+		this.onafterTextChange = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -75,48 +75,6 @@ export abstract class DatePickerImpl<T> extends ViewGroupImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
-
-	public setOnTextChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onTextChange == null || this.onTextChange == undefined) {
-			this.onTextChange = new CommandAttr<string>();
-		}
-		
-		this.onTextChange.setSetter(true);
-		this.onTextChange.setValue(value);
-		this.orderSet++;
-		this.onTextChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnbeforeTextChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onbeforeTextChange == null || this.onbeforeTextChange == undefined) {
-			this.onbeforeTextChange = new CommandAttr<string>();
-		}
-		
-		this.onbeforeTextChange.setSetter(true);
-		this.onbeforeTextChange.setValue(value);
-		this.orderSet++;
-		this.onbeforeTextChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnafterTextChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onafterTextChange == null || this.onafterTextChange == undefined) {
-			this.onafterTextChange = new CommandAttr<string>();
-		}
-		
-		this.onafterTextChange.setSetter(true);
-		this.onafterTextChange.setValue(value);
-		this.orderSet++;
-		this.onafterTextChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
 
 	public setDateFormat(value : string) : T {
 		this.resetIfRequired();
@@ -220,6 +178,48 @@ export abstract class DatePickerImpl<T> extends ViewGroupImpl<T>{
 		this.hintTextFormat.setValue(value);
 		this.orderSet++;
 		this.hintTextFormat.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnTextChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onTextChange == null || this.onTextChange == undefined) {
+			this.onTextChange = new CommandAttr<string>();
+		}
+		
+		this.onTextChange.setSetter(true);
+		this.onTextChange.setValue(value);
+		this.orderSet++;
+		this.onTextChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnbeforeTextChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onbeforeTextChange == null || this.onbeforeTextChange == undefined) {
+			this.onbeforeTextChange = new CommandAttr<string>();
+		}
+		
+		this.onbeforeTextChange.setSetter(true);
+		this.onbeforeTextChange.setValue(value);
+		this.orderSet++;
+		this.onbeforeTextChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnafterTextChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onafterTextChange == null || this.onafterTextChange == undefined) {
+			this.onafterTextChange = new CommandAttr<string>();
+		}
+		
+		this.onafterTextChange.setSetter(true);
+		this.onafterTextChange.setValue(value);
+		this.orderSet++;
+		this.onafterTextChange.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

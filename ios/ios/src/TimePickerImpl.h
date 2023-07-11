@@ -29,6 +29,7 @@
 @class ASTimePickerImpl_TimePickerCommandParamsBuilder;
 @class ASTimePickerImpl_TimePickerParamsBean;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -79,6 +80,8 @@
 
 - (NSString *)getTextEntered;
 
+- (IOSClass *)getViewClass;
+
 - (void)initTimePicker OBJC_METHOD_FAMILY_NONE;
 
 - (void)invalidate;
@@ -111,10 +114,9 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)showErrorWithNSString:(NSString *)message;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)showErrorWithNSString:(NSString *)message;
 
 #pragma mark Package-Private
 
@@ -171,8 +173,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADRect;
+@class ADView;
 @class ASTimePickerImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -190,11 +195,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -207,6 +218,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -214,6 +229,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -424,6 +442,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -456,9 +476,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setOnTextChangeWithNSString:(NSString *)value;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setPaddingBottomWithNSString:(NSString *)arg0;
 
@@ -641,6 +665,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetMinHeight;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetMinWidth;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetModelDescPath;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetModelIdPath;
 
