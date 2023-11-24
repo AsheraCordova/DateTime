@@ -358,6 +358,31 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
             ViewImpl.nativeSetVisibility(asNativeWidget(), visibility != View.VISIBLE);
             
         }
+        
+        	public void state0() {
+        		ViewImpl.state(TimePickerImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(TimePickerImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(TimePickerImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(TimePickerImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(TimePickerImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(TimePickerImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(TimePickerImpl.this);
+        }
 	}
 	@Override
 	public Class getViewClass() {
@@ -690,14 +715,10 @@ public void afterTextChanged (Editable s){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, s);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -710,7 +731,7 @@ public void afterTextChanged (Editable s){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -732,14 +753,10 @@ public void beforeTextChanged (CharSequence s,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, s,start,count,after);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -752,7 +769,7 @@ public void beforeTextChanged (CharSequence s,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -774,14 +791,10 @@ public void onTextChanged (CharSequence s,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, s,start,before,count);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -794,7 +807,7 @@ public void onTextChanged (CharSequence s,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -882,7 +895,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			timePicker.setId(IdGenerator.getId(id));
+			timePicker.setId((int) quickConvert(id, "id"));
 		}
 	}
 	
