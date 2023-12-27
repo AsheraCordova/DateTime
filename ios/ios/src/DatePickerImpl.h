@@ -235,6 +235,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -302,6 +312,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)addModelWithId:(id)arg0;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)endAnimator;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getHint;
@@ -355,6 +369,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setDateFormatWithNSString:(NSString *)value;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -484,6 +500,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setOnafterTextChangeWithNSString:(NSString *)value;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setOnbeforeTextChangeWithNSString:(NSString *)value;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
@@ -577,6 +601,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setZIndexWithInt:(jint)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)showClearButtonWithBoolean:(jboolean)value;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)startAnimator;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetAddStatesFromChildren;
 

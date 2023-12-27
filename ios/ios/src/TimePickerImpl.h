@@ -235,6 +235,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -302,6 +312,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)addModelWithId:(id)arg0;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)endAnimator;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getHint;
@@ -353,6 +367,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -478,6 +494,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setOnafterTextChangeWithNSString:(NSString *)value;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setOnbeforeTextChangeWithNSString:(NSString *)value;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
@@ -573,6 +597,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setZIndexWithInt:(jint)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)showClearButtonWithBoolean:(jboolean)value;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)startAnimator;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetAddStatesFromChildren;
 
