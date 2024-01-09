@@ -190,6 +190,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl)
 
 - (void)drawableStateChanged;
 
+- (void)endViewTransitionWithADView:(ADView *)view;
+
 - (void)executeWithNSString:(NSString *)method
           withNSObjectArray:(IOSObjectArray *)canvas;
 

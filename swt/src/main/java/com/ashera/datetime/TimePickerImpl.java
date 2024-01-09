@@ -88,7 +88,7 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
 	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		timePicker.removeView((View) w.asWidget());
-         ViewGroupImpl.nativeRemoveView(w);            
+		 nativeRemoveView(w);            
 		return remove;
 	}
 	
@@ -99,10 +99,22 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
 
         if (index + 1 <= timePicker.getChildCount()) {
             timePicker.removeViewAt(index);
-            ViewGroupImpl.nativeRemoveView(widget);            
+            nativeRemoveView(widget);
         }    
         return remove;
     }
+	
+	private void nativeRemoveView(IWidget widget) {
+		r.android.animation.LayoutTransition layoutTransition = timePicker.getLayoutTransition();
+		if (layoutTransition != null && (
+				layoutTransition.isTransitionTypeEnabled(r.android.animation.LayoutTransition.CHANGE_DISAPPEARING) ||
+				layoutTransition.isTransitionTypeEnabled(r.android.animation.LayoutTransition.DISAPPEARING)
+				)) {
+			addToBufferedRunnables(() -> ViewGroupImpl.nativeRemoveView(widget));          
+		} else {
+			ViewGroupImpl.nativeRemoveView(widget);
+		}
+	}
 	
 	@Override
 	public void add(IWidget w, int index) {
@@ -414,6 +426,12 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
         public void stateNo() {
         	ViewImpl.stateNo(TimePickerImpl.this);
         }
+     
+		@Override
+		public void endViewTransition(r.android.view.View view) {
+			super.endViewTransition(view);
+			runBufferedRunnables();
+		}
 	}
 	@Override
 	public Class getViewClass() {

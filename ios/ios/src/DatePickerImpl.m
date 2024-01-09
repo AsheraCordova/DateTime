@@ -27,6 +27,7 @@
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
 #include "J2ObjC_source.h"
+#include "LayoutTransition.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
 #include "PluginInvoker.h"
@@ -41,6 +42,7 @@
 #include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Runnable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/text/SimpleDateFormat.h"
 #include "java/util/Calendar.h"
@@ -60,6 +62,7 @@
 @protocol JavaUtilMap;
 
 
+#pragma clang diagnostic ignored "-Wprotocol"
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASDatePickerImpl () {
@@ -82,6 +85,8 @@
 }
 
 - (void)setWidgetOnNativeClass;
+
+- (void)nativeRemoveViewWithASIWidget:(id<ASIWidget>)widget;
 
 - (void)createLayoutParamsWithADView:(ADView *)view;
 
@@ -180,6 +185,8 @@ static NSString *ASDatePickerImpl_DISPLAY_FORMAT = @"dd/MM/yyyy";
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ASDatePickerImpl, DISPLAY_FORMAT, NSString *)
 
 __attribute__((unused)) static void ASDatePickerImpl_setWidgetOnNativeClass(ASDatePickerImpl *self);
+
+__attribute__((unused)) static void ASDatePickerImpl_nativeRemoveViewWithASIWidget_(ASDatePickerImpl *self, id<ASIWidget> widget);
 
 __attribute__((unused)) static void ASDatePickerImpl_createLayoutParamsWithADView_(ASDatePickerImpl *self, ADView *view);
 
@@ -346,6 +353,23 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_TextChangedListener)
 
 @end
 
+@interface ASDatePickerImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
+ @public
+  id<ASIWidget> val$widget_;
+}
+
+- (void)run;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASDatePickerImpl_$Lambda$1)
+
+__attribute__((unused)) static void ASDatePickerImpl_$Lambda$1_initWithASIWidget_(ASDatePickerImpl_$Lambda$1 *self, id<ASIWidget> capture$0);
+
+__attribute__((unused)) static ASDatePickerImpl_$Lambda$1 *new_ASDatePickerImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASDatePickerImpl_$Lambda$1 *create_ASDatePickerImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
 NSString *ASDatePickerImpl_LOCAL_NAME = @"com.ashera.datetime.DatePicker";
 NSString *ASDatePickerImpl_GROUP_NAME = @"com.ashera.datetime.DatePicker";
 
@@ -410,7 +434,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
   jboolean remove = [super removeWithASIWidget:w];
   [((ASDatePicker *) nil_chk(datePicker_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
-  ASViewGroupImpl_nativeRemoveViewWithASIWidget_(w);
+  ASDatePickerImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
@@ -419,9 +443,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   jboolean remove = [super removeWithInt:index];
   if (index + 1 <= [((ASDatePicker *) nil_chk(datePicker_)) getChildCount]) {
     [((ASDatePicker *) nil_chk(datePicker_)) removeViewAtWithInt:index];
-    ASViewGroupImpl_nativeRemoveViewWithASIWidget_(widget);
+    ASDatePickerImpl_nativeRemoveViewWithASIWidget_(self, widget);
   }
   return remove;
+}
+
+- (void)nativeRemoveViewWithASIWidget:(id<ASIWidget>)widget {
+  ASDatePickerImpl_nativeRemoveViewWithASIWidget_(self, widget);
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
@@ -842,56 +870,57 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, 6, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 11, 12, -1, -1, -1, -1 },
-    { NULL, "LADFrameLayout_LayoutParams;", 0x2, 13, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 9, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LADFrameLayout_LayoutParams;", 0x2, 14, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 17, 18, -1, -1, -1, -1 },
     { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 21, 22, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 22, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 23, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 23, 19, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 24, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 24, 20, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 25, 22, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 25, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 26, 19, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 27, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 29, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 30, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 31, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 26, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 27, 20, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 28, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 29, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 30, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 31, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 32, 33, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 33, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 35, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 36, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 37, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 34, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 36, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 37, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 38, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 39, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 40, 33, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 41, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 42, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 43, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 45, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 41, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 42, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 43, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 44, 45, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 46, 1, -1, -1, -1, -1 },
     { NULL, "LASDatePickerImpl_DatePickerBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASDatePickerImpl_DatePickerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASDatePickerImpl_DatePickerParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASDatePickerImpl_DatePickerCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 46, 47, -1, 48, -1, -1 },
+    { NULL, "V", 0x2, 47, 48, -1, 49, -1, -1 },
     { NULL, "V", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 49, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 50, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 51, 52, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 53, 52, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 54, 55, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 56, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 50, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 51, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 52, 53, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 54, 53, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 55, 56, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 57, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -906,64 +935,65 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[7].selector = @selector(asWidget);
   methods[8].selector = @selector(removeWithASIWidget:);
   methods[9].selector = @selector(removeWithInt:);
-  methods[10].selector = @selector(addWithASIWidget:withInt:);
-  methods[11].selector = @selector(createLayoutParamsWithADView:);
-  methods[12].selector = @selector(getLayoutParamsWithADView:);
-  methods[13].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
-  methods[14].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[15].selector = @selector(getViewClass);
-  methods[16].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[17].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[18].selector = @selector(asNativeWidget);
-  methods[19].selector = @selector(checkIosVersionWithNSString:);
-  methods[20].selector = @selector(requestLayout);
-  methods[21].selector = @selector(invalidate);
-  methods[22].selector = @selector(setHintWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[23].selector = @selector(getHintWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[24].selector = @selector(getTextEntered);
-  methods[25].selector = @selector(isViewVisible);
-  methods[26].selector = @selector(focus);
-  methods[27].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[28].selector = @selector(setMyTextWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[29].selector = @selector(getMyTextWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[30].selector = @selector(setOnAfterTextChangeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[31].selector = @selector(setBeforeOnTextChangeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[32].selector = @selector(setOnTextChangeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[33].selector = @selector(showClearButtonWithId:);
-  methods[34].selector = @selector(updateText);
-  methods[35].selector = @selector(setMaxDateWithInt:withInt:withInt:);
-  methods[36].selector = @selector(setMinDateWithInt:withInt:withInt:);
-  methods[37].selector = @selector(setDateWithInt:withInt:withInt:);
-  methods[38].selector = @selector(setMyMinDateTodayWithId:);
-  methods[39].selector = @selector(setMyMaxDateTodayWithId:);
-  methods[40].selector = @selector(setDateFormatWithId:);
-  methods[41].selector = @selector(initDatePicker);
-  methods[42].selector = @selector(resetError);
-  methods[43].selector = @selector(showErrorWithNSString:);
-  methods[44].selector = @selector(setHintTextFormatWithId:);
-  methods[45].selector = @selector(setIdWithNSString:);
-  methods[46].selector = @selector(setVisibleWithBoolean:);
-  methods[47].selector = @selector(getPluginWithNSString:);
-  methods[48].selector = @selector(getBean);
-  methods[49].selector = @selector(getBuilder);
-  methods[50].selector = @selector(getParamsBean);
-  methods[51].selector = @selector(getParamsBuilder);
-  methods[52].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[53].selector = @selector(nativeCreateView);
-  methods[54].selector = @selector(setMaxDateTodayWithId:);
-  methods[55].selector = @selector(setMinDateTodayWithId:);
-  methods[56].selector = @selector(nativeSetMinDateWithLong:);
-  methods[57].selector = @selector(nativeSetMaxDateWithLong:);
-  methods[58].selector = @selector(setOnClickListenerWithASIWidget:withADView_OnClickListener:);
-  methods[59].selector = @selector(setErrorWithNSString:);
+  methods[10].selector = @selector(nativeRemoveViewWithASIWidget:);
+  methods[11].selector = @selector(addWithASIWidget:withInt:);
+  methods[12].selector = @selector(createLayoutParamsWithADView:);
+  methods[13].selector = @selector(getLayoutParamsWithADView:);
+  methods[14].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
+  methods[15].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
+  methods[16].selector = @selector(getViewClass);
+  methods[17].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[18].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[19].selector = @selector(asNativeWidget);
+  methods[20].selector = @selector(checkIosVersionWithNSString:);
+  methods[21].selector = @selector(requestLayout);
+  methods[22].selector = @selector(invalidate);
+  methods[23].selector = @selector(setHintWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[24].selector = @selector(getHintWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[25].selector = @selector(getTextEntered);
+  methods[26].selector = @selector(isViewVisible);
+  methods[27].selector = @selector(focus);
+  methods[28].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[29].selector = @selector(setMyTextWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[30].selector = @selector(getMyTextWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[31].selector = @selector(setOnAfterTextChangeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[32].selector = @selector(setBeforeOnTextChangeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[33].selector = @selector(setOnTextChangeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[34].selector = @selector(showClearButtonWithId:);
+  methods[35].selector = @selector(updateText);
+  methods[36].selector = @selector(setMaxDateWithInt:withInt:withInt:);
+  methods[37].selector = @selector(setMinDateWithInt:withInt:withInt:);
+  methods[38].selector = @selector(setDateWithInt:withInt:withInt:);
+  methods[39].selector = @selector(setMyMinDateTodayWithId:);
+  methods[40].selector = @selector(setMyMaxDateTodayWithId:);
+  methods[41].selector = @selector(setDateFormatWithId:);
+  methods[42].selector = @selector(initDatePicker);
+  methods[43].selector = @selector(resetError);
+  methods[44].selector = @selector(showErrorWithNSString:);
+  methods[45].selector = @selector(setHintTextFormatWithId:);
+  methods[46].selector = @selector(setIdWithNSString:);
+  methods[47].selector = @selector(setVisibleWithBoolean:);
+  methods[48].selector = @selector(getPluginWithNSString:);
+  methods[49].selector = @selector(getBean);
+  methods[50].selector = @selector(getBuilder);
+  methods[51].selector = @selector(getParamsBean);
+  methods[52].selector = @selector(getParamsBuilder);
+  methods[53].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[54].selector = @selector(nativeCreateView);
+  methods[55].selector = @selector(setMaxDateTodayWithId:);
+  methods[56].selector = @selector(setMinDateTodayWithId:);
+  methods[57].selector = @selector(nativeSetMinDateWithLong:);
+  methods[58].selector = @selector(nativeSetMaxDateWithLong:);
+  methods[59].selector = @selector(setOnClickListenerWithASIWidget:withADView_OnClickListener:);
+  methods[60].selector = @selector(setErrorWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 57, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 58, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 58, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 59, -1, -1 },
     { "datePicker_", "LASDatePicker;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "datePickerWidget_", "LASBaseHasWidgets;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "DISPLAY_FORMAT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 59, -1, -1 },
+    { "DISPLAY_FORMAT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 60, -1, -1 },
     { "editText_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "year_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "month_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -977,8 +1007,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "paramsBean_", "LASDatePickerImpl_DatePickerParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "datepicker_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setHint", "getHint", "postSetAttribute", "setMyText", "getMyText", "setOnAfterTextChange", "setBeforeOnTextChange", "setOnTextChange", "showClearButton", "LNSObject;", "setMaxDate", "III", "setMinDate", "setDate", "setMyMinDateToday", "setMyMaxDateToday", "setDateFormat", "showError", "setHintTextFormat", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setMaxDateToday", "setMinDateToday", "nativeSetMinDate", "J", "nativeSetMaxDate", "setOnClickListener", "LASIWidget;LADView_OnClickListener;", "setError", &ASDatePickerImpl_LOCAL_NAME, &ASDatePickerImpl_GROUP_NAME, &ASDatePickerImpl_DISPLAY_FORMAT, "LASDatePickerImpl_DatePickerExt;LASDatePickerImpl_TextChangedListener;LASDatePickerImpl_DatePickerCommandBuilder;LASDatePickerImpl_DatePickerBean;LASDatePickerImpl_DatePickerParamsBean;LASDatePickerImpl_DatePickerCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASDatePickerImpl = { "DatePickerImpl", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x1, 60, 18, -1, 60, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setHint", "getHint", "postSetAttribute", "setMyText", "getMyText", "setOnAfterTextChange", "setBeforeOnTextChange", "setOnTextChange", "showClearButton", "LNSObject;", "setMaxDate", "III", "setMinDate", "setDate", "setMyMinDateToday", "setMyMaxDateToday", "setDateFormat", "showError", "setHintTextFormat", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setMaxDateToday", "setMinDateToday", "nativeSetMinDate", "J", "nativeSetMaxDate", "setOnClickListener", "LASIWidget;LADView_OnClickListener;", "setError", &ASDatePickerImpl_LOCAL_NAME, &ASDatePickerImpl_GROUP_NAME, &ASDatePickerImpl_DISPLAY_FORMAT, "LASDatePickerImpl_DatePickerExt;LASDatePickerImpl_TextChangedListener;LASDatePickerImpl_DatePickerCommandBuilder;LASDatePickerImpl_DatePickerBean;LASDatePickerImpl_DatePickerParamsBean;LASDatePickerImpl_DatePickerCommandParamsBuilder;" };
+  static const J2ObjcClassInfo _ASDatePickerImpl = { "DatePickerImpl", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x1, 61, 18, -1, 61, -1, -1, -1 };
   return &_ASDatePickerImpl;
 }
 
@@ -1028,6 +1058,16 @@ ASDatePickerImpl *create_ASDatePickerImpl_initWithNSString_withNSString_(NSStrin
 
 void ASDatePickerImpl_setWidgetOnNativeClass(ASDatePickerImpl *self) {
   ((ASUIView*) [self asNativeWidget]).widget = self;
+}
+
+void ASDatePickerImpl_nativeRemoveViewWithASIWidget_(ASDatePickerImpl *self, id<ASIWidget> widget) {
+  ADLayoutTransition *layoutTransition = [((ASDatePicker *) nil_chk(self->datePicker_)) getLayoutTransition];
+  if (layoutTransition != nil && ([layoutTransition isTransitionTypeEnabledWithInt:ADLayoutTransition_CHANGE_DISAPPEARING] || [layoutTransition isTransitionTypeEnabledWithInt:ADLayoutTransition_DISAPPEARING])) {
+    [self addToBufferedRunnablesWithJavaLangRunnable:new_ASDatePickerImpl_$Lambda$1_initWithASIWidget_(widget)];
+  }
+  else {
+    ASViewGroupImpl_nativeRemoveViewWithASIWidget_(widget);
+  }
 }
 
 void ASDatePickerImpl_createLayoutParamsWithADView_(ASDatePickerImpl *self, ADView *view) {
@@ -1424,6 +1464,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
   ASViewImpl_stateNoWithASIWidget_(this$0_);
 }
 
+- (void)endViewTransitionWithADView:(ADView *)view {
+  [super endViewTransitionWithADView:view];
+  [this$0_ runBufferedRunnables];
+}
+
 - (void)__javaClone:(ASDatePickerImpl_DatePickerExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -1468,6 +1513,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 35, 36, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1509,6 +1555,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
   methods[34].selector = @selector(state4);
   methods[35].selector = @selector(stateYes);
   methods[36].selector = @selector(stateNo);
+  methods[37].selector = @selector(endViewTransitionWithADView:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASDatePickerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -1516,10 +1563,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 35, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 37, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASDatePickerImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASDatePickerImpl_DatePickerExt = { "DatePickerExt", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x1, 37, 6, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASDatePickerImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "endViewTransition", "LADView;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASDatePickerImpl_DatePickerExt = { "DatePickerExt", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x1, 38, 6, 3, -1, -1, -1, -1 };
   return &_ASDatePickerImpl_DatePickerExt;
 }
 
@@ -2216,3 +2263,24 @@ ASDatePickerImpl_DatePickerCommandParamsBuilder *create_ASDatePickerImpl_DatePic
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl_DatePickerCommandParamsBuilder)
+
+@implementation ASDatePickerImpl_$Lambda$1
+
+- (void)run {
+  ASViewGroupImpl_nativeRemoveViewWithASIWidget_(val$widget_);
+}
+
+@end
+
+void ASDatePickerImpl_$Lambda$1_initWithASIWidget_(ASDatePickerImpl_$Lambda$1 *self, id<ASIWidget> capture$0) {
+  self->val$widget_ = capture$0;
+  NSObject_init(self);
+}
+
+ASDatePickerImpl_$Lambda$1 *new_ASDatePickerImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) {
+  J2OBJC_NEW_IMPL(ASDatePickerImpl_$Lambda$1, initWithASIWidget_, capture$0)
+}
+
+ASDatePickerImpl_$Lambda$1 *create_ASDatePickerImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) {
+  J2OBJC_CREATE_IMPL(ASDatePickerImpl_$Lambda$1, initWithASIWidget_, capture$0)
+}
