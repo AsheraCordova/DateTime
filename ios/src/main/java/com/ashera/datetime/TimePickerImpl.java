@@ -112,7 +112,7 @@ public class TimePickerImpl extends BaseHasWidgets implements com.ashera.validat
         }    
         return remove;
     }
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = timePicker.getLayoutTransition();
 		if (layoutTransition != null && (

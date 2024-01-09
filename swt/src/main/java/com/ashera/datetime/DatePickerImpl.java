@@ -104,7 +104,7 @@ public class DatePickerImpl extends BaseHasWidgets implements com.ashera.validat
         }    
         return remove;
     }
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = datePicker.getLayoutTransition();
 		if (layoutTransition != null && (
