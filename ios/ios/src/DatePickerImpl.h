@@ -342,6 +342,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -353,6 +357,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -466,6 +472,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -550,6 +562,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -569,6 +583,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -615,6 +631,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetBackgroundTint;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetBottom;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetClickable;
 
@@ -704,6 +722,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetLayoutMode;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetLeft;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetLongClickable;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetMaxHeight;
@@ -738,6 +758,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetPaddingTop;
 
+- (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetRight;
+
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetRotation;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetRotationX;
@@ -755,6 +777,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_DatePickerExt)
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetTextAlignment;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetTextDirection;
+
+- (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetTop;
 
 - (ASDatePickerImpl_DatePickerCommandBuilder *)tryGetTransformPivotX;
 

@@ -342,6 +342,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -353,6 +357,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -464,6 +470,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -544,6 +556,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -565,6 +579,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setTimeFormatWithNSString:(NSString *)value;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -611,6 +627,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetBackgroundTint;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetBottom;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetClickable;
 
@@ -700,6 +718,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetLayoutMode;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetLeft;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetLongClickable;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetMaxHeight;
@@ -734,6 +754,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetPaddingTop;
 
+- (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetRight;
+
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetRotation;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetRotationX;
@@ -751,6 +773,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TimePickerExt)
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetTextAlignment;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetTextDirection;
+
+- (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetTop;
 
 - (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetTransformPivotX;
 

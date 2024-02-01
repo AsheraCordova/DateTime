@@ -325,7 +325,9 @@ public class DatePickerImpl extends BaseHasWidgets implements com.ashera.validat
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override
