@@ -13,6 +13,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -32,38 +33,38 @@ export abstract class DatePickerImpl<T> extends ViewGroupImpl<T>{
 	//start - body
 	static initialize() {
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "dateFormat" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "dateFormat" }))
 	dateFormat!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "hint" }))
 	hint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "minDateToday" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "minDateToday" }))
 	minDateToday!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "maxDateToday" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "maxDateToday" }))
 	maxDateToday!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "text" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "text" }))
 	text!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onTextChange" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onTextChange" }))
 	onTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onbeforeTextChange" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onbeforeTextChange" }))
 	onbeforeTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onafterTextChange" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onafterTextChange" }))
 	onafterTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "showClearButton" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "showClearButton" }))
 	showClearButton_!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hintTextFormat" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "hintTextFormat" }))
 	hintTextFormat!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
