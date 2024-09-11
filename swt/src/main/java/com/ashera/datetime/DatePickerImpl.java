@@ -1215,7 +1215,7 @@ public class DatePickerCommandParamsBuilder extends com.ashera.layout.ViewGroupI
 	}
 
 	public void showDatePicker() {
-		final org.eclipse.swt.widgets.Shell dialog = new org.eclipse.swt.widgets.Shell (org.eclipse.swt.widgets.Display.getDefault().getActiveShell(), org.eclipse.swt.SWT.DIALOG_TRIM | org.eclipse.swt.SWT.SYSTEM_MODAL);
+		final org.eclipse.swt.widgets.Shell dialog = new org.eclipse.swt.widgets.Shell (com.ashera.common.ShellManager.getInstance().getActiveShell(), org.eclipse.swt.SWT.DIALOG_TRIM | org.eclipse.swt.SWT.SYSTEM_MODAL | org.eclipse.swt.SWT.SHEET);
 		dialog.setLayout (new org.eclipse.swt.layout.GridLayout (1, false));
 		final org.eclipse.swt.widgets.DateTime calendar = new org.eclipse.swt.widgets.DateTime (dialog, org.eclipse.swt.SWT.CALENDAR | org.eclipse.swt.SWT.BORDER);
 		org.eclipse.swt.widgets.Button ok = new org.eclipse.swt.widgets.Button (dialog, org.eclipse.swt.SWT.PUSH);
@@ -1228,8 +1228,8 @@ public class DatePickerCommandParamsBuilder extends com.ashera.layout.ViewGroupI
 				dialog.close ();
 			}
 		});
-		dialog.pack ();
-		dialog.open ();
+		dialog.pack();
+		dialog.open();
 	}
 	
 	private void setOnClickListener(IWidget clearButton, OnClickListener onClickListener) {
