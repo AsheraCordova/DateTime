@@ -97,7 +97,7 @@ public class DatePickerImpl extends BaseHasWidgets implements com.ashera.validat
 	}
 
 	@Override
-	public boolean remove(IWidget w) {		
+	public boolean remove(IWidget w) {
 		boolean remove = super.remove(w);
 		datePicker.removeView((View) w.asWidget());
 		 nativeRemoveView(w);            
@@ -321,7 +321,9 @@ public class DatePickerImpl extends BaseHasWidgets implements com.ashera.validat
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(DatePickerImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(DatePickerImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -334,9 +336,10 @@ public class DatePickerImpl extends BaseHasWidgets implements com.ashera.validat
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
-    		IWidget widget = template.loadLazyWidgets(DatePickerImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+    		
+    		IWidget widget = template.loadLazyWidgets(DatePickerImpl.this);
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -448,6 +451,7 @@ public class DatePickerImpl extends BaseHasWidgets implements com.ashera.validat
 			super.endViewTransition(view);
 			runBufferedRunnables();
 		}
+	
 	}
 	@Override
 	public Class getViewClass() {
