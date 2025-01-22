@@ -107,6 +107,7 @@ Context context = (Context) fragment.getRootActivity();
 		
 		
 		ViewGroupImpl.registerCommandConveter(this);
+
 	}
 
 	@Override
@@ -506,7 +507,7 @@ Context context = (Context) fragment.getRootActivity();
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-				ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
+				ViewGroupImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		Object nativeWidget = asNativeWidget();
 		switch (key.getAttributeName()) {
 			case "timeFormat": {
@@ -971,199 +972,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 	
     
 
-	
-private TimePickerCommandBuilder builder;
-private TimePickerBean bean;
-public Object getPlugin(String plugin) {
-	return WidgetFactory.getAttributable(plugin).newInstance(this);
-}
-public TimePickerBean getBean() {
-	if (bean == null) {
-		bean = new TimePickerBean();
-	}
-	return bean;
-}
-public TimePickerCommandBuilder getBuilder() {
-	if (builder == null) {
-		builder = new TimePickerCommandBuilder();
-	}
-	return builder;
-}
-
-
-public  class TimePickerCommandBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandBuilder <TimePickerCommandBuilder> {
-    public TimePickerCommandBuilder() {
-	}
-	
-	public TimePickerCommandBuilder execute(boolean setter) {
-		if (setter) {
-			executeCommand(command, null, IWidget.COMMAND_EXEC_SETTER_METHOD);
-			getFragment().remeasure();
-		}
-		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
-return this;	}
-
-public TimePickerCommandBuilder setTimeFormat(String value) {
-	Map<String, Object> attrs = initCommand("timeFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public TimePickerCommandBuilder tryGetHint() {
-	Map<String, Object> attrs = initCommand("hint");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getHint() {
-	Map<String, Object> attrs = initCommand("hint");
-	return attrs.get("commandReturnValue");
-}
-public TimePickerCommandBuilder setHint(String value) {
-	Map<String, Object> attrs = initCommand("hint");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public TimePickerCommandBuilder tryGetText() {
-	Map<String, Object> attrs = initCommand("text");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getText() {
-	Map<String, Object> attrs = initCommand("text");
-	return attrs.get("commandReturnValue");
-}
-public TimePickerCommandBuilder setText(String value) {
-	Map<String, Object> attrs = initCommand("text");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public TimePickerCommandBuilder setOnTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public TimePickerCommandBuilder setOnbeforeTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onbeforeTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public TimePickerCommandBuilder setOnafterTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onafterTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public TimePickerCommandBuilder showClearButton(boolean value) {
-	Map<String, Object> attrs = initCommand("showClearButton");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public TimePickerCommandBuilder setHintTextFormat(String value) {
-	Map<String, Object> attrs = initCommand("hintTextFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-}
-public class TimePickerBean extends com.ashera.layout.ViewGroupImpl.ViewGroupBean{
-		public TimePickerBean() {
-			super(TimePickerImpl.this);
-		}
-public void setTimeFormat(String value) {
-	getBuilder().reset().setTimeFormat(value).execute(true);
-}
-
-public Object getHint() {
-	return getBuilder().reset().tryGetHint().execute(false).getHint(); 
-}
-public void setHint(String value) {
-	getBuilder().reset().setHint(value).execute(true);
-}
-
-public Object getText() {
-	return getBuilder().reset().tryGetText().execute(false).getText(); 
-}
-public void setText(String value) {
-	getBuilder().reset().setText(value).execute(true);
-}
-
-public void setOnTextChange(String value) {
-	getBuilder().reset().setOnTextChange(value).execute(true);
-}
-
-public void setOnbeforeTextChange(String value) {
-	getBuilder().reset().setOnbeforeTextChange(value).execute(true);
-}
-
-public void setOnafterTextChange(String value) {
-	getBuilder().reset().setOnafterTextChange(value).execute(true);
-}
-
-public void showClearButton(boolean value) {
-	getBuilder().reset().showClearButton(value).execute(true);
-}
-
-public void setHintTextFormat(String value) {
-	getBuilder().reset().setHintTextFormat(value).execute(true);
-}
-
-}
-
-
-private TimePickerCommandParamsBuilder paramsBuilder;
-private TimePickerParamsBean paramsBean;
-
-public TimePickerParamsBean getParamsBean() {
-	if (paramsBean == null) {
-		paramsBean = new TimePickerParamsBean();
-	}
-	return paramsBean;
-}
-public TimePickerCommandParamsBuilder getParamsBuilder() {
-	if (paramsBuilder == null) {
-		paramsBuilder = new TimePickerCommandParamsBuilder();
-	}
-	return paramsBuilder;
-}
-
-
-
-public class TimePickerParamsBean extends com.ashera.layout.ViewGroupImpl.ViewGroupParamsBean{
-}
-
-
-
-
-
-public class TimePickerCommandParamsBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandParamsBuilder<TimePickerCommandParamsBuilder>{
-}
-
-	//end - body
+		//end - body
 	//start - timepicker
 	private int hour;
 	private int minute;

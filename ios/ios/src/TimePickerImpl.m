@@ -14,7 +14,6 @@
 #include "FrameLayout.h"
 #include "HasWidgets.h"
 #include "IActivity.h"
-#include "IAttributable.h"
 #include "IConverter.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
@@ -65,7 +64,6 @@
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASTimePickerImpl () {
  @public
@@ -76,10 +74,6 @@
   JavaTextDateFormat *timeFormat_;
   ASBaseHasWidgets *datePickerWidget_;
   id<ASIWidget> editText_;
-  ASTimePickerImpl_TimePickerCommandBuilder *builder_;
-  ASTimePickerImpl_TimePickerBean *bean_;
-  ASTimePickerImpl_TimePickerCommandParamsBuilder *paramsBuilder_;
-  ASTimePickerImpl_TimePickerParamsBean *paramsBean_;
   id datepicker_;
 }
 
@@ -156,10 +150,6 @@ J2OBJC_FIELD_SETTER(ASTimePickerImpl, timePicker_, ASTimePicker *)
 J2OBJC_FIELD_SETTER(ASTimePickerImpl, timeFormat_, JavaTextDateFormat *)
 J2OBJC_FIELD_SETTER(ASTimePickerImpl, datePickerWidget_, ASBaseHasWidgets *)
 J2OBJC_FIELD_SETTER(ASTimePickerImpl, editText_, id<ASIWidget>)
-J2OBJC_FIELD_SETTER(ASTimePickerImpl, builder_, ASTimePickerImpl_TimePickerCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASTimePickerImpl, bean_, ASTimePickerImpl_TimePickerBean *)
-J2OBJC_FIELD_SETTER(ASTimePickerImpl, paramsBuilder_, ASTimePickerImpl_TimePickerCommandParamsBuilder *)
-J2OBJC_FIELD_SETTER(ASTimePickerImpl, paramsBean_, ASTimePickerImpl_TimePickerParamsBean *)
 J2OBJC_FIELD_SETTER(ASTimePickerImpl, datepicker_, id)
 
 inline NSString *ASTimePickerImpl_get_DISPLAY_FORMAT(void);
@@ -310,20 +300,6 @@ __attribute__((unused)) static ASTimePickerImpl_TextChangedListener *new_ASTimeP
 __attribute__((unused)) static ASTimePickerImpl_TextChangedListener *create_ASTimePickerImpl_TextChangedListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TextChangedListener)
-
-@interface ASTimePickerImpl_TimePickerCommandBuilder () {
- @public
-  ASTimePickerImpl *this$0_;
-}
-
-@end
-
-@interface ASTimePickerImpl_TimePickerBean () {
- @public
-  ASTimePickerImpl *this$0_;
-}
-
-@end
 
 @interface ASTimePickerImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
@@ -724,38 +700,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASTimePickerImpl_TimePickerBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASTimePickerImpl_TimePickerBean_initWithASTimePickerImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASTimePickerImpl_TimePickerCommandBuilder_initWithASTimePickerImpl_(self);
-  }
-  return builder_;
-}
-
-- (ASTimePickerImpl_TimePickerParamsBean *)getParamsBean {
-  if (paramsBean_ == nil) {
-    paramsBean_ = new_ASTimePickerImpl_TimePickerParamsBean_initWithASTimePickerImpl_(self);
-  }
-  return paramsBean_;
-}
-
-- (ASTimePickerImpl_TimePickerCommandParamsBuilder *)getParamsBuilder {
-  if (paramsBuilder_ == nil) {
-    paramsBuilder_ = new_ASTimePickerImpl_TimePickerCommandParamsBuilder_initWithASTimePickerImpl_(self);
-  }
-  return paramsBuilder_;
-}
-
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params {
   ASTimePickerImpl_nativeCreateWithJavaUtilMap_(self, params);
 }
@@ -837,15 +781,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 39, 33, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 40, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 41, 42, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 43, 1, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 44, 45, -1, 46, -1, -1 },
+    { NULL, "V", 0x2, 43, 44, -1, 45, -1, -1 },
     { NULL, "V", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 47, 48, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 49, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 46, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 48, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -896,35 +835,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[43].selector = @selector(setHintTextFormatWithId:);
   methods[44].selector = @selector(setIdWithNSString:);
   methods[45].selector = @selector(setVisibleWithBoolean:);
-  methods[46].selector = @selector(getPluginWithNSString:);
-  methods[47].selector = @selector(getBean);
-  methods[48].selector = @selector(getBuilder);
-  methods[49].selector = @selector(getParamsBean);
-  methods[50].selector = @selector(getParamsBuilder);
-  methods[51].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[52].selector = @selector(nativeCreateView);
-  methods[53].selector = @selector(setOnClickListenerWithASIWidget:withADView_OnClickListener:);
-  methods[54].selector = @selector(setErrorWithNSString:);
+  methods[46].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[47].selector = @selector(nativeCreateView);
+  methods[48].selector = @selector(setOnClickListenerWithASIWidget:withADView_OnClickListener:);
+  methods[49].selector = @selector(setErrorWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 50, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 51, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 49, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 50, -1, -1 },
     { "timePicker_", "LASTimePicker;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "hour_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "minute_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "timeFormat_", "LJavaTextDateFormat;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "datePickerWidget_", "LASBaseHasWidgets;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "DISPLAY_FORMAT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 52, -1, -1 },
+    { "DISPLAY_FORMAT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 51, -1, -1 },
     { "editText_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASTimePickerImpl_TimePickerCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASTimePickerImpl_TimePickerBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBuilder_", "LASTimePickerImpl_TimePickerCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBean_", "LASTimePickerImpl_TimePickerParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "datepicker_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setHint", "getHint", "postSetAttribute", "setMyText", "getMyText", "setOnAfterTextChange", "setBeforeOnTextChange", "setOnTextChange", "showClearButton", "LNSObject;", "setTimeFormat", "setTime", "II", "LJavaTextDateFormat;", "showError", "setHintTextFormat", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setOnClickListener", "LASIWidget;LADView_OnClickListener;", "setError", &ASTimePickerImpl_LOCAL_NAME, &ASTimePickerImpl_GROUP_NAME, &ASTimePickerImpl_DISPLAY_FORMAT, "LASTimePickerImpl_TimePickerExt;LASTimePickerImpl_TextChangedListener;LASTimePickerImpl_TimePickerCommandBuilder;LASTimePickerImpl_TimePickerBean;LASTimePickerImpl_TimePickerParamsBean;LASTimePickerImpl_TimePickerCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASTimePickerImpl = { "TimePickerImpl", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x1, 55, 15, -1, 53, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setHint", "getHint", "postSetAttribute", "setMyText", "getMyText", "setOnAfterTextChange", "setBeforeOnTextChange", "setOnTextChange", "showClearButton", "LNSObject;", "setTimeFormat", "setTime", "II", "LJavaTextDateFormat;", "showError", "setHintTextFormat", "setId", "setVisible", "Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setOnClickListener", "LASIWidget;LADView_OnClickListener;", "setError", &ASTimePickerImpl_LOCAL_NAME, &ASTimePickerImpl_GROUP_NAME, &ASTimePickerImpl_DISPLAY_FORMAT, "LASTimePickerImpl_TimePickerExt;LASTimePickerImpl_TextChangedListener;" };
+  static const J2ObjcClassInfo _ASTimePickerImpl = { "TimePickerImpl", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x1, 50, 11, -1, 52, -1, -1, -1 };
   return &_ASTimePickerImpl;
 }
 
@@ -1754,355 +1684,6 @@ ASTimePickerImpl_TextChangedListener *create_ASTimePickerImpl_TextChangedListene
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl_TextChangedListener)
-
-@implementation ASTimePickerImpl_TimePickerCommandBuilder
-
-- (instancetype)initWithASTimePickerImpl:(ASTimePickerImpl *)outer$ {
-  ASTimePickerImpl_TimePickerCommandBuilder_initWithASTimePickerImpl_(self, outer$);
-  return self;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)setTimeFormatWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"timeFormat"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetHint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"hint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getHint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"hint"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)setHintWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"hint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)tryGetText {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"text"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getText {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"text"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)setTextWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"text"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)showClearButtonWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"showClearButton"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)setHintTextFormatWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"hintTextFormat"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)setOnTextChangeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onTextChange"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)setOnbeforeTextChangeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onbeforeTextChange"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASTimePickerImpl_TimePickerCommandBuilder *)setOnafterTextChangeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onafterTextChange"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, 5, 4, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, 6, 4, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, 9, 4, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, 10, 4, -1, -1, -1, -1 },
-    { NULL, "LASTimePickerImpl_TimePickerCommandBuilder;", 0x1, 11, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASTimePickerImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setTimeFormatWithNSString:);
-  methods[3].selector = @selector(tryGetHint);
-  methods[4].selector = @selector(getHint);
-  methods[5].selector = @selector(setHintWithNSString:);
-  methods[6].selector = @selector(tryGetText);
-  methods[7].selector = @selector(getText);
-  methods[8].selector = @selector(setTextWithNSString:);
-  methods[9].selector = @selector(showClearButtonWithBoolean:);
-  methods[10].selector = @selector(setHintTextFormatWithNSString:);
-  methods[11].selector = @selector(setOnTextChangeWithNSString:);
-  methods[12].selector = @selector(setOnbeforeTextChangeWithNSString:);
-  methods[13].selector = @selector(setOnafterTextChangeWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASTimePickerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASTimePickerImpl;", "execute", "Z", "setTimeFormat", "LNSString;", "setHint", "setText", "showClearButton", "setHintTextFormat", "setOnTextChange", "setOnbeforeTextChange", "setOnafterTextChange", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilder<Lcom/ashera/datetime/TimePickerImpl$TimePickerCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASTimePickerImpl_TimePickerCommandBuilder = { "TimePickerCommandBuilder", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x1, 14, 1, 0, -1, -1, 12, -1 };
-  return &_ASTimePickerImpl_TimePickerCommandBuilder;
-}
-
-@end
-
-void ASTimePickerImpl_TimePickerCommandBuilder_initWithASTimePickerImpl_(ASTimePickerImpl_TimePickerCommandBuilder *self, ASTimePickerImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-}
-
-ASTimePickerImpl_TimePickerCommandBuilder *new_ASTimePickerImpl_TimePickerCommandBuilder_initWithASTimePickerImpl_(ASTimePickerImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASTimePickerImpl_TimePickerCommandBuilder, initWithASTimePickerImpl_, outer$)
-}
-
-ASTimePickerImpl_TimePickerCommandBuilder *create_ASTimePickerImpl_TimePickerCommandBuilder_initWithASTimePickerImpl_(ASTimePickerImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASTimePickerImpl_TimePickerCommandBuilder, initWithASTimePickerImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl_TimePickerCommandBuilder)
-
-@implementation ASTimePickerImpl_TimePickerBean
-
-- (instancetype)initWithASTimePickerImpl:(ASTimePickerImpl *)outer$ {
-  ASTimePickerImpl_TimePickerBean_initWithASTimePickerImpl_(self, outer$);
-  return self;
-}
-
-- (void)setTimeFormatWithNSString:(NSString *)value {
-  (void) [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTimeFormatWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getHint {
-  return [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetHint])) executeWithBoolean:false])) getHint];
-}
-
-- (void)setHintWithNSString:(NSString *)value {
-  (void) [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setHintWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getText {
-  return [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetText])) executeWithBoolean:false])) getText];
-}
-
-- (void)setTextWithNSString:(NSString *)value {
-  (void) [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)showClearButtonWithBoolean:(jboolean)value {
-  (void) [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) showClearButtonWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setHintTextFormatWithNSString:(NSString *)value {
-  (void) [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setHintTextFormatWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnTextChangeWithNSString:(NSString *)value {
-  (void) [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnTextChangeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnbeforeTextChangeWithNSString:(NSString *)value {
-  (void) [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnbeforeTextChangeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnafterTextChangeWithNSString:(NSString *)value {
-  (void) [((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([((ASTimePickerImpl_TimePickerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnafterTextChangeWithNSString:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASTimePickerImpl:);
-  methods[1].selector = @selector(setTimeFormatWithNSString:);
-  methods[2].selector = @selector(getHint);
-  methods[3].selector = @selector(setHintWithNSString:);
-  methods[4].selector = @selector(getText);
-  methods[5].selector = @selector(setTextWithNSString:);
-  methods[6].selector = @selector(showClearButtonWithBoolean:);
-  methods[7].selector = @selector(setHintTextFormatWithNSString:);
-  methods[8].selector = @selector(setOnTextChangeWithNSString:);
-  methods[9].selector = @selector(setOnbeforeTextChangeWithNSString:);
-  methods[10].selector = @selector(setOnafterTextChangeWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASTimePickerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASTimePickerImpl;", "setTimeFormat", "LNSString;", "setHint", "setText", "showClearButton", "Z", "setHintTextFormat", "setOnTextChange", "setOnbeforeTextChange", "setOnafterTextChange" };
-  static const J2ObjcClassInfo _ASTimePickerImpl_TimePickerBean = { "TimePickerBean", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x1, 11, 1, 0, -1, -1, -1, -1 };
-  return &_ASTimePickerImpl_TimePickerBean;
-}
-
-@end
-
-void ASTimePickerImpl_TimePickerBean_initWithASTimePickerImpl_(ASTimePickerImpl_TimePickerBean *self, ASTimePickerImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(self, outer$);
-}
-
-ASTimePickerImpl_TimePickerBean *new_ASTimePickerImpl_TimePickerBean_initWithASTimePickerImpl_(ASTimePickerImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASTimePickerImpl_TimePickerBean, initWithASTimePickerImpl_, outer$)
-}
-
-ASTimePickerImpl_TimePickerBean *create_ASTimePickerImpl_TimePickerBean_initWithASTimePickerImpl_(ASTimePickerImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASTimePickerImpl_TimePickerBean, initWithASTimePickerImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl_TimePickerBean)
-
-@implementation ASTimePickerImpl_TimePickerParamsBean
-
-- (instancetype)initWithASTimePickerImpl:(ASTimePickerImpl *)outer$ {
-  ASTimePickerImpl_TimePickerParamsBean_initWithASTimePickerImpl_(self, outer$);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASTimePickerImpl:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASTimePickerImpl;" };
-  static const J2ObjcClassInfo _ASTimePickerImpl_TimePickerParamsBean = { "TimePickerParamsBean", "com.ashera.datetime", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, -1, -1 };
-  return &_ASTimePickerImpl_TimePickerParamsBean;
-}
-
-@end
-
-void ASTimePickerImpl_TimePickerParamsBean_initWithASTimePickerImpl_(ASTimePickerImpl_TimePickerParamsBean *self, ASTimePickerImpl *outer$) {
-  ASViewGroupImpl_ViewGroupParamsBean_init(self);
-}
-
-ASTimePickerImpl_TimePickerParamsBean *new_ASTimePickerImpl_TimePickerParamsBean_initWithASTimePickerImpl_(ASTimePickerImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASTimePickerImpl_TimePickerParamsBean, initWithASTimePickerImpl_, outer$)
-}
-
-ASTimePickerImpl_TimePickerParamsBean *create_ASTimePickerImpl_TimePickerParamsBean_initWithASTimePickerImpl_(ASTimePickerImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASTimePickerImpl_TimePickerParamsBean, initWithASTimePickerImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl_TimePickerParamsBean)
-
-@implementation ASTimePickerImpl_TimePickerCommandParamsBuilder
-
-- (instancetype)initWithASTimePickerImpl:(ASTimePickerImpl *)outer$ {
-  ASTimePickerImpl_TimePickerCommandParamsBuilder_initWithASTimePickerImpl_(self, outer$);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASTimePickerImpl:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASTimePickerImpl;", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilder<Lcom/ashera/datetime/TimePickerImpl$TimePickerCommandParamsBuilder;>;" };
-  static const J2ObjcClassInfo _ASTimePickerImpl_TimePickerCommandParamsBuilder = { "TimePickerCommandParamsBuilder", "com.ashera.datetime", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, 1, -1 };
-  return &_ASTimePickerImpl_TimePickerCommandParamsBuilder;
-}
-
-@end
-
-void ASTimePickerImpl_TimePickerCommandParamsBuilder_initWithASTimePickerImpl_(ASTimePickerImpl_TimePickerCommandParamsBuilder *self, ASTimePickerImpl *outer$) {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-}
-
-ASTimePickerImpl_TimePickerCommandParamsBuilder *new_ASTimePickerImpl_TimePickerCommandParamsBuilder_initWithASTimePickerImpl_(ASTimePickerImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASTimePickerImpl_TimePickerCommandParamsBuilder, initWithASTimePickerImpl_, outer$)
-}
-
-ASTimePickerImpl_TimePickerCommandParamsBuilder *create_ASTimePickerImpl_TimePickerCommandParamsBuilder_initWithASTimePickerImpl_(ASTimePickerImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASTimePickerImpl_TimePickerCommandParamsBuilder, initWithASTimePickerImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl_TimePickerCommandParamsBuilder)
 
 @implementation ASTimePickerImpl_$Lambda$1
 

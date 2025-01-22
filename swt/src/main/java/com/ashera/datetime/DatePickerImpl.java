@@ -78,6 +78,7 @@ public class DatePickerImpl extends BaseHasWidgets implements com.ashera.validat
 		
 		
 		ViewGroupImpl.registerCommandConveter(this);
+
 	}
 
 	@Override
@@ -455,7 +456,7 @@ public class DatePickerImpl extends BaseHasWidgets implements com.ashera.validat
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-				ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
+				ViewGroupImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		Object nativeWidget = asNativeWidget();
 		switch (key.getAttributeName()) {
 			case "dateFormat": {
@@ -1023,199 +1024,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 		return getStyle("swtStyle", initStyle, params, fragment);
 	}
 
-	
-private DatePickerCommandBuilder builder;
-private DatePickerBean bean;
-public Object getPlugin(String plugin) {
-	return WidgetFactory.getAttributable(plugin).newInstance(this);
-}
-public DatePickerBean getBean() {
-	if (bean == null) {
-		bean = new DatePickerBean();
-	}
-	return bean;
-}
-public DatePickerCommandBuilder getBuilder() {
-	if (builder == null) {
-		builder = new DatePickerCommandBuilder();
-	}
-	return builder;
-}
-
-
-public  class DatePickerCommandBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandBuilder <DatePickerCommandBuilder> {
-    public DatePickerCommandBuilder() {
-	}
-	
-	public DatePickerCommandBuilder execute(boolean setter) {
-		if (setter) {
-			executeCommand(command, null, IWidget.COMMAND_EXEC_SETTER_METHOD);
-			getFragment().remeasure();
-		}
-		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
-return this;	}
-
-public DatePickerCommandBuilder setDateFormat(String value) {
-	Map<String, Object> attrs = initCommand("dateFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public DatePickerCommandBuilder tryGetHint() {
-	Map<String, Object> attrs = initCommand("hint");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getHint() {
-	Map<String, Object> attrs = initCommand("hint");
-	return attrs.get("commandReturnValue");
-}
-public DatePickerCommandBuilder setHint(String value) {
-	Map<String, Object> attrs = initCommand("hint");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public DatePickerCommandBuilder tryGetText() {
-	Map<String, Object> attrs = initCommand("text");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getText() {
-	Map<String, Object> attrs = initCommand("text");
-	return attrs.get("commandReturnValue");
-}
-public DatePickerCommandBuilder setText(String value) {
-	Map<String, Object> attrs = initCommand("text");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public DatePickerCommandBuilder showClearButton(boolean value) {
-	Map<String, Object> attrs = initCommand("showClearButton");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public DatePickerCommandBuilder setHintTextFormat(String value) {
-	Map<String, Object> attrs = initCommand("hintTextFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public DatePickerCommandBuilder setOnTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public DatePickerCommandBuilder setOnbeforeTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onbeforeTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public DatePickerCommandBuilder setOnafterTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onafterTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-}
-public class DatePickerBean extends com.ashera.layout.ViewGroupImpl.ViewGroupBean{
-		public DatePickerBean() {
-			super(DatePickerImpl.this);
-		}
-public void setDateFormat(String value) {
-	getBuilder().reset().setDateFormat(value).execute(true);
-}
-
-public Object getHint() {
-	return getBuilder().reset().tryGetHint().execute(false).getHint(); 
-}
-public void setHint(String value) {
-	getBuilder().reset().setHint(value).execute(true);
-}
-
-public Object getText() {
-	return getBuilder().reset().tryGetText().execute(false).getText(); 
-}
-public void setText(String value) {
-	getBuilder().reset().setText(value).execute(true);
-}
-
-public void showClearButton(boolean value) {
-	getBuilder().reset().showClearButton(value).execute(true);
-}
-
-public void setHintTextFormat(String value) {
-	getBuilder().reset().setHintTextFormat(value).execute(true);
-}
-
-public void setOnTextChange(String value) {
-	getBuilder().reset().setOnTextChange(value).execute(true);
-}
-
-public void setOnbeforeTextChange(String value) {
-	getBuilder().reset().setOnbeforeTextChange(value).execute(true);
-}
-
-public void setOnafterTextChange(String value) {
-	getBuilder().reset().setOnafterTextChange(value).execute(true);
-}
-
-}
-
-
-private DatePickerCommandParamsBuilder paramsBuilder;
-private DatePickerParamsBean paramsBean;
-
-public DatePickerParamsBean getParamsBean() {
-	if (paramsBean == null) {
-		paramsBean = new DatePickerParamsBean();
-	}
-	return paramsBean;
-}
-public DatePickerCommandParamsBuilder getParamsBuilder() {
-	if (paramsBuilder == null) {
-		paramsBuilder = new DatePickerCommandParamsBuilder();
-	}
-	return paramsBuilder;
-}
-
-
-
-public class DatePickerParamsBean extends com.ashera.layout.ViewGroupImpl.ViewGroupParamsBean{
-}
-
-
-
-
-
-public class DatePickerCommandParamsBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandParamsBuilder<DatePickerCommandParamsBuilder>{
-}
-
-	//end - body
+		//end - body
 	private void nativeCreate(Map<String, Object> params) {
 		pane = new org.eclipse.swt.widgets.Composite((org.eclipse.swt.widgets.Composite)ViewImpl.getParent(this), getStyle(params, fragment));
 		initDatePicker();
