@@ -3,9 +3,20 @@
 //  source: D:\Java\git\core-ios-widgets\IOSDateTimePlugin\src\main\java\com\ashera\datetime\TimePicker.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "FrameLayout.h"
 #include "J2ObjC_source.h"
 #include "TimePicker.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASTimePicker
@@ -45,3 +56,5 @@ ASTimePicker *create_ASTimePicker_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePicker)
+
+J2OBJC_NAME_MAPPING(ASTimePicker, "com.ashera.datetime", "AS")

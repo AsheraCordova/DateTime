@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSDateTimePlugin\src\main\java\com\ashera\datetime\TimePicker.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_TimePicker")
@@ -39,6 +40,7 @@ FOUNDATION_EXPORT ASTimePicker *create_ASTimePicker_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASTimePicker)
 
 @compatibility_alias ComAsheraDatetimeTimePicker ASTimePicker;
+
 
 #endif
 

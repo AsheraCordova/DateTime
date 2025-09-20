@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSDateTimePlugin\src\main\java\com\ashera\datetime\TimePickerImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseHasWidgets.h"
 #include "CommonConverters.h"
 #include "ConverterFactory.h"
@@ -57,10 +62,12 @@
 #include "ASUIView.h"
 #include "HasLifeCycleDecorators.h"
 
-@class JavaTextDateFormat;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -69,8 +76,8 @@
  @public
   id uiView_;
   ASTimePicker *timePicker_;
-  jint hour_;
-  jint minute_;
+  int32_t hour_;
+  int32_t minute_;
   JavaTextDateFormat *timeFormat_;
   ASBaseHasWidgets *datePickerWidget_;
   id<ASIWidget> editText_;
@@ -127,8 +134,8 @@
 
 - (void)setNow;
 
-- (void)setTimeWithInt:(jint)hour
-               withInt:(jint)minute;
+- (void)setTimeWithInt:(int32_t)hour
+               withInt:(int32_t)minute;
 
 - (void)setTimeFormatWithJavaTextDateFormat:(JavaTextDateFormat *)timeFormat;
 
@@ -186,7 +193,7 @@ __attribute__((unused)) static void ASTimePickerImpl_setTimeFormatWithId_(ASTime
 
 __attribute__((unused)) static void ASTimePickerImpl_setNow(ASTimePickerImpl *self);
 
-__attribute__((unused)) static void ASTimePickerImpl_setTimeWithInt_withInt_(ASTimePickerImpl *self, jint hour, jint minute);
+__attribute__((unused)) static void ASTimePickerImpl_setTimeWithInt_withInt_(ASTimePickerImpl *self, int32_t hour, int32_t minute);
 
 __attribute__((unused)) static void ASTimePickerImpl_setTimeFormatWithJavaTextDateFormat_(ASTimePickerImpl *self, JavaTextDateFormat *timeFormat);
 
@@ -202,12 +209,12 @@ __attribute__((unused)) static void ASTimePickerImpl_setErrorWithNSString_(ASTim
 
 @interface ASTimePickerImpl_TimePickerExt () {
  @public
-  __unsafe_unretained ASTimePickerImpl *this$0_;
+  WEAK_ ASTimePickerImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -237,6 +244,7 @@ __attribute__((unused)) static ASTimePickerImpl_1 *new_ASTimePickerImpl_1_initWi
 
 __attribute__((unused)) static ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePickerImpl *outer$);
 
+
 @interface ASTimePickerImpl_TextChangedListener : NSObject < ADTextWatcher, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -257,24 +265,24 @@ __attribute__((unused)) static ASTimePickerImpl_1 *create_ASTimePickerImpl_1_ini
 - (void)afterTextChangedWithADEditable:(id<ADEditable>)s;
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after;
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after;
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count;
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count;
 
 - (id<JavaUtilMap>)getOnTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                           withInt:(jint)start
-                                                           withInt:(jint)before
-                                                           withInt:(jint)count;
+                                                           withInt:(int32_t)start
+                                                           withInt:(int32_t)before
+                                                           withInt:(int32_t)count;
 
 - (id<JavaUtilMap>)getOnbeforeTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                 withInt:(jint)start
-                                                                 withInt:(jint)count
-                                                                 withInt:(jint)after;
+                                                                 withInt:(int32_t)start
+                                                                 withInt:(int32_t)count
+                                                                 withInt:(int32_t)after;
 
 - (id<JavaUtilMap>)getOnafterTextChangeEventObjWithADEditable:(id<ADEditable>)s;
 
@@ -301,6 +309,7 @@ __attribute__((unused)) static ASTimePickerImpl_TextChangedListener *create_ASTi
 
 J2OBJC_TYPE_LITERAL_HEADER(ASTimePickerImpl_TextChangedListener)
 
+
 @interface ASTimePickerImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   id<ASIWidget> val$widget_;
@@ -317,6 +326,7 @@ __attribute__((unused)) static void ASTimePickerImpl_$Lambda$1_initWithASIWidget
 __attribute__((unused)) static ASTimePickerImpl_$Lambda$1 *new_ASTimePickerImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASTimePickerImpl_$Lambda$1 *create_ASTimePickerImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
 
 NSString *ASTimePickerImpl_LOCAL_NAME = @"com.ashera.datetime.TimePicker";
 NSString *ASTimePickerImpl_GROUP_NAME = @"com.ashera.datetime.TimePicker";
@@ -377,16 +387,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return timePicker_;
 }
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
-  jboolean remove = [super removeWithASIWidget:w];
+- (bool)removeWithASIWidget:(id<ASIWidget>)w {
+  bool remove = [super removeWithASIWidget:w];
   [((ASTimePicker *) nil_chk(timePicker_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
   ASTimePickerImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
-- (jboolean)removeWithInt:(jint)index {
+- (bool)removeWithInt:(int32_t)index {
   id<ASIWidget> widget = [((id<JavaUtilList>) nil_chk(widgets_)) getWithInt:index];
-  jboolean remove = [super removeWithInt:index];
+  bool remove = [super removeWithInt:index];
   if (index + 1 <= [((ASTimePicker *) nil_chk(timePicker_)) getChildCount]) {
     [((ASTimePicker *) nil_chk(timePicker_)) removeViewAtWithInt:index];
     ASTimePickerImpl_nativeRemoveViewWithASIWidget_(self, widget);
@@ -399,7 +409,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index {
+                 withInt:(int32_t)index {
   if (index != -2) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
     ASTimePickerImpl_createLayoutParamsWithADView_(self, view);
@@ -540,7 +550,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -575,7 +585,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jboolean)isViewVisible {
+- (bool)isViewVisible {
   return [((ASTimePicker *) nil_chk(timePicker_)) getVisibility] == ADView_VISIBLE;
 }
 
@@ -646,8 +656,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASTimePickerImpl_setNow(self);
 }
 
-- (void)setTimeWithInt:(jint)hour
-               withInt:(jint)minute {
+- (void)setTimeWithInt:(int32_t)hour
+               withInt:(int32_t)minute {
   ASTimePickerImpl_setTimeWithInt_withInt_(self, hour, minute);
 }
 
@@ -660,7 +670,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)resetError {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASTimePickerImpl_setErrorWithNSString_(self, nil);
   }
@@ -673,7 +683,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)showErrorWithNSString:(NSString *)message {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASTimePickerImpl_setErrorWithNSString_(self, message);
   }
@@ -696,7 +706,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -969,7 +979,7 @@ void ASTimePickerImpl_setOnTextChangeWithASWidgetAttribute_withNSString_withId_w
 
 void ASTimePickerImpl_showClearButtonWithId_(ASTimePickerImpl *self, id objValue) {
   id<ASIWidget> clearButton = [self findWidgetByIdWithNSString:@"@+id/clearButton"];
-  jint visibility = ADView_VISIBLE;
+  int32_t visibility = ADView_VISIBLE;
   if ([((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]) {
     visibility = ADView_VISIBLE;
   }
@@ -988,7 +998,7 @@ void ASTimePickerImpl_setNow(ASTimePickerImpl *self) {
   ASTimePickerImpl_setTimeWithInt_withInt_(self, [((JavaUtilCalendar *) nil_chk(c)) getWithInt:JavaUtilCalendar_HOUR_OF_DAY], [c getWithInt:JavaUtilCalendar_MINUTE]);
 }
 
-void ASTimePickerImpl_setTimeWithInt_withInt_(ASTimePickerImpl *self, jint hour, jint minute) {
+void ASTimePickerImpl_setTimeWithInt_withInt_(ASTimePickerImpl *self, int32_t hour, int32_t minute) {
   self->hour_ = hour;
   self->minute_ = minute;
   ASTimePickerImpl_updateText(self);
@@ -1029,25 +1039,27 @@ void ASTimePickerImpl_setErrorWithNSString_(ASTimePickerImpl *self, NSString *me
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl)
 
+J2OBJC_NAME_MAPPING(ASTimePickerImpl, "com.ashera.datetime", "AS")
+
 @implementation ASTimePickerImpl_TimePickerExt
 
 - (id<ASIWidget>)getWidget {
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -1056,8 +1068,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -1073,11 +1085,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -1104,8 +1116,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -1173,12 +1185,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -1208,7 +1220,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
@@ -1417,7 +1429,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTimePickerImpl_TimePickerExt)
     { "this$0_", "LASTimePickerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASTimePickerImpl;", "onClick", "LADView;", "initTimePicker" };
-  static const J2ObjcClassInfo _ASTimePickerImpl_1 = { "", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _ASTimePickerImpl_1 = { "", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 3, -1, -1 };
   return &_ASTimePickerImpl_1;
 }
 
@@ -1477,7 +1489,7 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1488,9 +1500,9 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
 }
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after {
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after {
   if (action_ == nil || [action_ isEqual:@"onbeforeTextChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onbeforeTextChange"];
     id<JavaUtilMap> obj = [self getOnbeforeTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:count withInt:after];
@@ -1512,7 +1524,7 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1523,9 +1535,9 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
 }
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count {
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count {
   if (action_ == nil || [action_ isEqual:@"onTextChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onTextChange"];
     id<JavaUtilMap> obj = [self getOnTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:before withInt:count];
@@ -1547,7 +1559,7 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1558,9 +1570,9 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
 }
 
 - (id<JavaUtilMap>)getOnTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                           withInt:(jint)start
-                                                           withInt:(jint)before
-                                                           withInt:(jint)count {
+                                                           withInt:(int32_t)start
+                                                           withInt:(int32_t)before
+                                                           withInt:(int32_t)count {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"textchange"];
@@ -1581,9 +1593,9 @@ ASTimePickerImpl_1 *create_ASTimePickerImpl_1_initWithASTimePickerImpl_(ASTimePi
 }
 
 - (id<JavaUtilMap>)getOnbeforeTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                 withInt:(jint)start
-                                                                 withInt:(jint)count
-                                                                 withInt:(jint)after {
+                                                                 withInt:(int32_t)start
+                                                                 withInt:(int32_t)count
+                                                                 withInt:(int32_t)after {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"beforetextchange"];

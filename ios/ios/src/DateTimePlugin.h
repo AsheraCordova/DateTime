@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSDateTimePlugin\src\main\java\com\ashera\datetime\DateTimePlugin.java
 //
 
+#import <Foundation/Foundation.h>
 #include "J2ObjC_header.h"
 
 #pragma push_macro("INCLUDE_ALL_DateTimePlugin")
@@ -39,6 +40,7 @@ FOUNDATION_EXPORT void ASDateTimePlugin_initPlugin(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASDateTimePlugin)
 
 @compatibility_alias ComAsheraDatetimeDateTimePlugin ASDateTimePlugin;
+
 
 #endif
 

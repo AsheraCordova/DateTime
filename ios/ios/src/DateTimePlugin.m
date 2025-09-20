@@ -3,11 +3,22 @@
 //  source: D:\Java\git\core-ios-widgets\IOSDateTimePlugin\src\main\java\com\ashera\datetime\DateTimePlugin.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "DatePickerImpl.h"
 #include "DateTimePlugin.h"
 #include "J2ObjC_source.h"
 #include "TimePickerImpl.h"
 #include "WidgetFactory.h"
+
+
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 @implementation ASDateTimePlugin
@@ -59,3 +70,5 @@ void ASDateTimePlugin_initPlugin() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDateTimePlugin)
+
+J2OBJC_NAME_MAPPING(ASDateTimePlugin, "com.ashera.datetime", "AS")

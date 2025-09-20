@@ -3,6 +3,11 @@
 //  source: D:\Java\git\core-ios-widgets\IOSDateTimePlugin\src\main\java\com\ashera\datetime\DatePickerImpl.java
 //
 
+#define J2OBJC_IMPORTED_BY_JAVA_IMPLEMENTATION 1
+
+
+
+
 #include "BaseHasWidgets.h"
 #include "CommonConverters.h"
 #include "ConverterFactory.h"
@@ -41,6 +46,7 @@
 #include "java/lang/Boolean.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/text/SimpleDateFormat.h"
@@ -56,10 +62,12 @@
 #include "ASUIView.h"
 #include "HasLifeCycleDecorators.h"
 
-@class JavaTextSimpleDateFormat;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+
+@class NSString;
+
+
+#pragma clang diagnostic error "-Wreturn-type"
+#pragma clang diagnostic ignored "-Wswitch"
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -70,11 +78,11 @@
   ASDatePicker *datePicker_;
   ASBaseHasWidgets *datePickerWidget_;
   id<ASIWidget> editText_;
-  jint year_;
-  jint month_;
-  jint day_;
-  jlong maxDate_;
-  jlong minDate_;
+  int32_t year_;
+  int32_t month_;
+  int32_t day_;
+  int64_t maxDate_;
+  int64_t minDate_;
   JavaTextSimpleDateFormat *displayFormatter_;
   id datepicker_;
 }
@@ -127,17 +135,17 @@
 
 - (void)updateText;
 
-- (void)setMaxDateWithInt:(jint)year
-                  withInt:(jint)month
-                  withInt:(jint)day;
+- (void)setMaxDateWithInt:(int32_t)year
+                  withInt:(int32_t)month
+                  withInt:(int32_t)day;
 
-- (void)setMinDateWithInt:(jint)year
-                  withInt:(jint)month
-                  withInt:(jint)day;
+- (void)setMinDateWithInt:(int32_t)year
+                  withInt:(int32_t)month
+                  withInt:(int32_t)day;
 
-- (void)setDateWithInt:(jint)year
-               withInt:(jint)month
-               withInt:(jint)day;
+- (void)setDateWithInt:(int32_t)year
+               withInt:(int32_t)month
+               withInt:(int32_t)day;
 
 - (void)setMyMinDateTodayWithId:(id)objValue;
 
@@ -153,9 +161,9 @@
 
 - (void)setMinDateTodayWithId:(id)objValue;
 
-- (void)nativeSetMinDateWithLong:(jlong)timeInMills;
+- (void)nativeSetMinDateWithLong:(int64_t)timeInMills;
 
-- (void)nativeSetMaxDateWithLong:(jlong)timeInMills;
+- (void)nativeSetMaxDateWithLong:(int64_t)timeInMills;
 
 - (void)setOnClickListenerWithASIWidget:(id<ASIWidget>)clearButton
              withADView_OnClickListener:(id<ADView_OnClickListener>)onClickListener;
@@ -203,11 +211,11 @@ __attribute__((unused)) static void ASDatePickerImpl_showClearButtonWithId_(ASDa
 
 __attribute__((unused)) static void ASDatePickerImpl_updateText(ASDatePickerImpl *self);
 
-__attribute__((unused)) static void ASDatePickerImpl_setMaxDateWithInt_withInt_withInt_(ASDatePickerImpl *self, jint year, jint month, jint day);
+__attribute__((unused)) static void ASDatePickerImpl_setMaxDateWithInt_withInt_withInt_(ASDatePickerImpl *self, int32_t year, int32_t month, int32_t day);
 
-__attribute__((unused)) static void ASDatePickerImpl_setMinDateWithInt_withInt_withInt_(ASDatePickerImpl *self, jint year, jint month, jint day);
+__attribute__((unused)) static void ASDatePickerImpl_setMinDateWithInt_withInt_withInt_(ASDatePickerImpl *self, int32_t year, int32_t month, int32_t day);
 
-__attribute__((unused)) static void ASDatePickerImpl_setDateWithInt_withInt_withInt_(ASDatePickerImpl *self, jint year, jint month, jint day);
+__attribute__((unused)) static void ASDatePickerImpl_setDateWithInt_withInt_withInt_(ASDatePickerImpl *self, int32_t year, int32_t month, int32_t day);
 
 __attribute__((unused)) static void ASDatePickerImpl_setMyMinDateTodayWithId_(ASDatePickerImpl *self, id objValue);
 
@@ -223,9 +231,9 @@ __attribute__((unused)) static void ASDatePickerImpl_setMaxDateTodayWithId_(ASDa
 
 __attribute__((unused)) static void ASDatePickerImpl_setMinDateTodayWithId_(ASDatePickerImpl *self, id objValue);
 
-__attribute__((unused)) static void ASDatePickerImpl_nativeSetMinDateWithLong_(ASDatePickerImpl *self, jlong timeInMills);
+__attribute__((unused)) static void ASDatePickerImpl_nativeSetMinDateWithLong_(ASDatePickerImpl *self, int64_t timeInMills);
 
-__attribute__((unused)) static void ASDatePickerImpl_nativeSetMaxDateWithLong_(ASDatePickerImpl *self, jlong timeInMills);
+__attribute__((unused)) static void ASDatePickerImpl_nativeSetMaxDateWithLong_(ASDatePickerImpl *self, int64_t timeInMills);
 
 __attribute__((unused)) static void ASDatePickerImpl_setOnClickListenerWithASIWidget_withADView_OnClickListener_(ASDatePickerImpl *self, id<ASIWidget> clearButton, id<ADView_OnClickListener> onClickListener);
 
@@ -233,12 +241,12 @@ __attribute__((unused)) static void ASDatePickerImpl_setErrorWithNSString_(ASDat
 
 @interface ASDatePickerImpl_DatePickerExt () {
  @public
-  __unsafe_unretained ASDatePickerImpl *this$0_;
+  WEAK_ ASDatePickerImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
   id<JavaUtilList> overlays_;
-  jint mMaxWidth_;
-  jint mMaxHeight_;
+  int32_t mMaxWidth_;
+  int32_t mMaxHeight_;
   id<JavaUtilMap> templates_;
 }
 
@@ -268,6 +276,7 @@ __attribute__((unused)) static ASDatePickerImpl_1 *new_ASDatePickerImpl_1_initWi
 
 __attribute__((unused)) static ASDatePickerImpl_1 *create_ASDatePickerImpl_1_initWithASDatePickerImpl_(ASDatePickerImpl *outer$);
 
+
 @interface ASDatePickerImpl_TextChangedListener : NSObject < ADTextWatcher, ASIListener > {
  @public
   id<ASIWidget> w_;
@@ -288,24 +297,24 @@ __attribute__((unused)) static ASDatePickerImpl_1 *create_ASDatePickerImpl_1_ini
 - (void)afterTextChangedWithADEditable:(id<ADEditable>)s;
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after;
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after;
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count;
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count;
 
 - (id<JavaUtilMap>)getOnTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                           withInt:(jint)start
-                                                           withInt:(jint)before
-                                                           withInt:(jint)count;
+                                                           withInt:(int32_t)start
+                                                           withInt:(int32_t)before
+                                                           withInt:(int32_t)count;
 
 - (id<JavaUtilMap>)getOnbeforeTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                 withInt:(jint)start
-                                                                 withInt:(jint)count
-                                                                 withInt:(jint)after;
+                                                                 withInt:(int32_t)start
+                                                                 withInt:(int32_t)count
+                                                                 withInt:(int32_t)after;
 
 - (id<JavaUtilMap>)getOnafterTextChangeEventObjWithADEditable:(id<ADEditable>)s;
 
@@ -332,6 +341,7 @@ __attribute__((unused)) static ASDatePickerImpl_TextChangedListener *create_ASDa
 
 J2OBJC_TYPE_LITERAL_HEADER(ASDatePickerImpl_TextChangedListener)
 
+
 @interface ASDatePickerImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
   id<ASIWidget> val$widget_;
@@ -348,6 +358,7 @@ __attribute__((unused)) static void ASDatePickerImpl_$Lambda$1_initWithASIWidget
 __attribute__((unused)) static ASDatePickerImpl_$Lambda$1 *new_ASDatePickerImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASDatePickerImpl_$Lambda$1 *create_ASDatePickerImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
 
 NSString *ASDatePickerImpl_LOCAL_NAME = @"com.ashera.datetime.DatePicker";
 NSString *ASDatePickerImpl_GROUP_NAME = @"com.ashera.datetime.DatePicker";
@@ -410,16 +421,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return datePicker_;
 }
 
-- (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
-  jboolean remove = [super removeWithASIWidget:w];
+- (bool)removeWithASIWidget:(id<ASIWidget>)w {
+  bool remove = [super removeWithASIWidget:w];
   [((ASDatePicker *) nil_chk(datePicker_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
   ASDatePickerImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
-- (jboolean)removeWithInt:(jint)index {
+- (bool)removeWithInt:(int32_t)index {
   id<ASIWidget> widget = [((id<JavaUtilList>) nil_chk(widgets_)) getWithInt:index];
-  jboolean remove = [super removeWithInt:index];
+  bool remove = [super removeWithInt:index];
   if (index + 1 <= [((ASDatePicker *) nil_chk(datePicker_)) getChildCount]) {
     [((ASDatePicker *) nil_chk(datePicker_)) removeViewAtWithInt:index];
     ASDatePickerImpl_nativeRemoveViewWithASIWidget_(self, widget);
@@ -432,7 +443,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
-                 withInt:(jint)index {
+                 withInt:(int32_t)index {
   if (index != -2) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
     ASDatePickerImpl_createLayoutParamsWithADView_(self, view);
@@ -583,7 +594,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return uiView_;
 }
 
-- (jboolean)checkIosVersionWithNSString:(NSString *)v {
+- (bool)checkIosVersionWithNSString:(NSString *)v {
   return ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending);
 }
 
@@ -618,7 +629,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (jboolean)isViewVisible {
+- (bool)isViewVisible {
   return [((ASDatePicker *) nil_chk(datePicker_)) getVisibility] == ADView_VISIBLE;
 }
 
@@ -676,21 +687,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASDatePickerImpl_updateText(self);
 }
 
-- (void)setMaxDateWithInt:(jint)year
-                  withInt:(jint)month
-                  withInt:(jint)day {
+- (void)setMaxDateWithInt:(int32_t)year
+                  withInt:(int32_t)month
+                  withInt:(int32_t)day {
   ASDatePickerImpl_setMaxDateWithInt_withInt_withInt_(self, year, month, day);
 }
 
-- (void)setMinDateWithInt:(jint)year
-                  withInt:(jint)month
-                  withInt:(jint)day {
+- (void)setMinDateWithInt:(int32_t)year
+                  withInt:(int32_t)month
+                  withInt:(int32_t)day {
   ASDatePickerImpl_setMinDateWithInt_withInt_withInt_(self, year, month, day);
 }
 
-- (void)setDateWithInt:(jint)year
-               withInt:(jint)month
-               withInt:(jint)day {
+- (void)setDateWithInt:(int32_t)year
+               withInt:(int32_t)month
+               withInt:(int32_t)day {
   ASDatePickerImpl_setDateWithInt_withInt_withInt_(self, year, month, day);
 }
 
@@ -716,7 +727,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)resetError {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASDatePickerImpl_setErrorWithNSString_(self, nil);
   }
@@ -729,7 +740,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)showErrorWithNSString:(NSString *)message {
-  jint validationErrorDisplayType = [self getValidationErrorDisplayType];
+  int32_t validationErrorDisplayType = [self getValidationErrorDisplayType];
   if ((validationErrorDisplayType & ASFormElement_ERROR_DISPLAY_TYPE_POPUP) != 0) {
     ASDatePickerImpl_setErrorWithNSString_(self, message);
   }
@@ -752,7 +763,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)setVisibleWithBoolean:(jboolean)b {
+- (void)setVisibleWithBoolean:(bool)b {
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
@@ -788,11 +799,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASDatePickerImpl_setMinDateTodayWithId_(self, objValue);
 }
 
-- (void)nativeSetMinDateWithLong:(jlong)timeInMills {
+- (void)nativeSetMinDateWithLong:(int64_t)timeInMills {
   ASDatePickerImpl_nativeSetMinDateWithLong_(self, timeInMills);
 }
 
-- (void)nativeSetMaxDateWithLong:(jlong)timeInMills {
+- (void)nativeSetMaxDateWithLong:(int64_t)timeInMills {
   ASDatePickerImpl_nativeSetMaxDateWithLong_(self, timeInMills);
 }
 
@@ -1062,7 +1073,7 @@ void ASDatePickerImpl_setOnTextChangeWithASWidgetAttribute_withNSString_withId_w
 
 void ASDatePickerImpl_showClearButtonWithId_(ASDatePickerImpl *self, id objValue) {
   id<ASIWidget> clearButton = [self findWidgetByIdWithNSString:@"@+id/clearButton"];
-  jint visibility = ADView_VISIBLE;
+  int32_t visibility = ADView_VISIBLE;
   if ([((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]) {
     visibility = ADView_VISIBLE;
   }
@@ -1085,19 +1096,19 @@ void ASDatePickerImpl_updateText(ASDatePickerImpl *self) {
   }
 }
 
-void ASDatePickerImpl_setMaxDateWithInt_withInt_withInt_(ASDatePickerImpl *self, jint year, jint month, jint day) {
+void ASDatePickerImpl_setMaxDateWithInt_withInt_withInt_(ASDatePickerImpl *self, int32_t year, int32_t month, int32_t day) {
   JavaUtilCalendar *c = JavaUtilCalendar_getInstance();
   [((JavaUtilCalendar *) nil_chk(c)) setWithInt:year withInt:month withInt:day withInt:23 withInt:59 withInt:59];
   self->maxDate_ = [c getTimeInMillis];
 }
 
-void ASDatePickerImpl_setMinDateWithInt_withInt_withInt_(ASDatePickerImpl *self, jint year, jint month, jint day) {
+void ASDatePickerImpl_setMinDateWithInt_withInt_withInt_(ASDatePickerImpl *self, int32_t year, int32_t month, int32_t day) {
   JavaUtilCalendar *c = JavaUtilCalendar_getInstance();
   [((JavaUtilCalendar *) nil_chk(c)) setWithInt:year withInt:month withInt:day withInt:0 withInt:0 withInt:0];
   self->minDate_ = [c getTimeInMillis];
 }
 
-void ASDatePickerImpl_setDateWithInt_withInt_withInt_(ASDatePickerImpl *self, jint year, jint month, jint day) {
+void ASDatePickerImpl_setDateWithInt_withInt_withInt_(ASDatePickerImpl *self, int32_t year, int32_t month, int32_t day) {
   self->year_ = year;
   self->month_ = month;
   self->day_ = day;
@@ -1147,7 +1158,7 @@ void ASDatePickerImpl_setMinDateTodayWithId_(ASDatePickerImpl *self, id objValue
   ASDatePickerImpl_nativeSetMaxDateWithLong_(self, self->minDate_);
 }
 
-void ASDatePickerImpl_nativeSetMinDateWithLong_(ASDatePickerImpl *self, jlong timeInMills) {
+void ASDatePickerImpl_nativeSetMinDateWithLong_(ASDatePickerImpl *self, int64_t timeInMills) {
   if (timeInMills == -1) {
     [((UIDatePicker*)self->datepicker_) setMaximumDate:nil];
   } else {
@@ -1155,7 +1166,7 @@ void ASDatePickerImpl_nativeSetMinDateWithLong_(ASDatePickerImpl *self, jlong ti
   }
 }
 
-void ASDatePickerImpl_nativeSetMaxDateWithLong_(ASDatePickerImpl *self, jlong timeInMills) {
+void ASDatePickerImpl_nativeSetMaxDateWithLong_(ASDatePickerImpl *self, int64_t timeInMills) {
   if (timeInMills == -1) {
     [((UIDatePicker*)self->datepicker_) setMinimumDate: nil];
   } else {
@@ -1172,25 +1183,27 @@ void ASDatePickerImpl_setErrorWithNSString_(ASDatePickerImpl *self, NSString *me
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
 
+J2OBJC_NAME_MAPPING(ASDatePickerImpl, "com.ashera.datetime", "AS")
+
 @implementation ASDatePickerImpl_DatePickerExt
 
 - (id<ASIWidget>)getWidget {
   return this$0_;
 }
 
-- (void)setMaxWidthWithInt:(jint)width {
+- (void)setMaxWidthWithInt:(int32_t)width {
   mMaxWidth_ = width;
 }
 
-- (void)setMaxHeightWithInt:(jint)height {
+- (void)setMaxHeightWithInt:(int32_t)height {
   mMaxHeight_ = height;
 }
 
-- (jint)getMaxWidth {
+- (int32_t)getMaxWidth {
   return mMaxWidth_;
 }
 
-- (jint)getMaxHeight {
+- (int32_t)getMaxHeight {
   return mMaxHeight_;
 }
 
@@ -1199,8 +1212,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
   return self;
 }
 
-- (void)onMeasureWithInt:(jint)widthMeasureSpec
-                 withInt:(jint)heightMeasureSpec {
+- (void)onMeasureWithInt:(int32_t)widthMeasureSpec
+                 withInt:(int32_t)heightMeasureSpec {
   if (mMaxWidth_ > 0) {
     widthMeasureSpec = ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(mMaxWidth_, ADView_MeasureSpec_AT_MOST);
   }
@@ -1216,11 +1229,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
   }
 }
 
-- (void)onLayoutWithBoolean:(jboolean)changed
-                    withInt:(jint)l
-                    withInt:(jint)t
-                    withInt:(jint)r
-                    withInt:(jint)b {
+- (void)onLayoutWithBoolean:(bool)changed
+                    withInt:(int32_t)l
+                    withInt:(int32_t)t
+                    withInt:(int32_t)r
+                    withInt:(int32_t)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
   if (![self isOverlay]) {
@@ -1247,8 +1260,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
           withNSObjectArray:(IOSObjectArray *)canvas {
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
+- (void)updateMeasuredDimensionWithInt:(int32_t)width
+                               withInt:(int32_t)height {
   [self setMeasuredDimensionWithInt:width withInt:height];
 }
 
@@ -1316,12 +1329,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
   displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
 }
 
-- (void)offsetTopAndBottomWithInt:(jint)offset {
+- (void)offsetTopAndBottomWithInt:(int32_t)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
-- (void)offsetLeftAndRightWithInt:(jint)offset {
+- (void)offsetLeftAndRightWithInt:(int32_t)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
@@ -1351,7 +1364,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl)
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
-- (void)setVisibilityWithInt:(jint)visibility {
+- (void)setVisibilityWithInt:(int32_t)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
@@ -1560,7 +1573,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASDatePickerImpl_DatePickerExt)
     { "this$0_", "LASDatePickerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASDatePickerImpl;", "onClick", "LADView;", "initDatePicker" };
-  static const J2ObjcClassInfo _ASDatePickerImpl_1 = { "", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x8010, 2, 1, 0, -1, 3, -1, -1 };
+  static const J2ObjcClassInfo _ASDatePickerImpl_1 = { "", "com.ashera.datetime", ptrTable, methods, fields, 7, 0x8000, 2, 1, 0, -1, 3, -1, -1 };
   return &_ASDatePickerImpl_1;
 }
 
@@ -1620,7 +1633,7 @@ ASDatePickerImpl_1 *create_ASDatePickerImpl_1_initWithASDatePickerImpl_(ASDatePi
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1631,9 +1644,9 @@ ASDatePickerImpl_1 *create_ASDatePickerImpl_1_initWithASDatePickerImpl_(ASDatePi
 }
 
 - (void)beforeTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                          withInt:(jint)start
-                                          withInt:(jint)count
-                                          withInt:(jint)after {
+                                          withInt:(int32_t)start
+                                          withInt:(int32_t)count
+                                          withInt:(int32_t)after {
   if (action_ == nil || [action_ isEqual:@"onbeforeTextChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onbeforeTextChange"];
     id<JavaUtilMap> obj = [self getOnbeforeTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:count withInt:after];
@@ -1655,7 +1668,7 @@ ASDatePickerImpl_1 *create_ASDatePickerImpl_1_initWithASDatePickerImpl_(ASDatePi
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1666,9 +1679,9 @@ ASDatePickerImpl_1 *create_ASDatePickerImpl_1_initWithASDatePickerImpl_(ASDatePi
 }
 
 - (void)onTextChangedWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                      withInt:(jint)start
-                                      withInt:(jint)before
-                                      withInt:(jint)count {
+                                      withInt:(int32_t)start
+                                      withInt:(int32_t)before
+                                      withInt:(int32_t)count {
   if (action_ == nil || [action_ isEqual:@"onTextChange"]) {
     [((id<ASIWidget>) nil_chk(w_)) syncModelFromUiToPojoWithNSString:@"onTextChange"];
     id<JavaUtilMap> obj = [self getOnTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:before withInt:count];
@@ -1690,7 +1703,7 @@ ASDatePickerImpl_1 *create_ASDatePickerImpl_1_initWithASDatePickerImpl_(ASDatePi
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
+    if (strValue_ != nil && ![strValue_ isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       if (activity != nil) {
         [activity sendEventMessageWithJavaUtilMap:obj];
@@ -1701,9 +1714,9 @@ ASDatePickerImpl_1 *create_ASDatePickerImpl_1_initWithASDatePickerImpl_(ASDatePi
 }
 
 - (id<JavaUtilMap>)getOnTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                           withInt:(jint)start
-                                                           withInt:(jint)before
-                                                           withInt:(jint)count {
+                                                           withInt:(int32_t)start
+                                                           withInt:(int32_t)before
+                                                           withInt:(int32_t)count {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"textchange"];
@@ -1724,9 +1737,9 @@ ASDatePickerImpl_1 *create_ASDatePickerImpl_1_initWithASDatePickerImpl_(ASDatePi
 }
 
 - (id<JavaUtilMap>)getOnbeforeTextChangeEventObjWithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                 withInt:(jint)start
-                                                                 withInt:(jint)count
-                                                                 withInt:(jint)after {
+                                                                 withInt:(int32_t)start
+                                                                 withInt:(int32_t)count
+                                                                 withInt:(int32_t)after {
   id<JavaUtilMap> obj = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(obj)) putWithId:@"action" withId:@"action"];
   (void) [obj putWithId:@"eventType" withId:@"beforetextchange"];
