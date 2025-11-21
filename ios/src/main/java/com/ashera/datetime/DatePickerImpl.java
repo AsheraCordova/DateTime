@@ -1,3 +1,18 @@
+//start - license
+/*
+ * Copyright (c) 2025 Ashera Cordova
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ */
+//end - license
 package com.ashera.datetime;
 // start - imports
 import java.util.*;
@@ -1075,7 +1090,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 		nativeSetMaxDate(minDate);
 	}
 	
-	private native void nativeSetMinDate(long timeInMills) /*-[
+	private native void nativeSetMinDate(long timeInMills)/*-[
 		if (timeInMills == -1) {
 			[((UIDatePicker*)self->datepicker_) setMaximumDate:nil];
 		} else {
@@ -1083,7 +1098,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 		}
 	]-*/;
 	
-	private native void nativeSetMaxDate(long timeInMills) /*-[
+	private native void nativeSetMaxDate(long timeInMills)/*-[
 		if (timeInMills == -1) {
 			[((UIDatePicker*)self->datepicker_) setMinimumDate: nil];
 		} else {
